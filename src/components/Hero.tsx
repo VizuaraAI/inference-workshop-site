@@ -1,8 +1,31 @@
 'use client'
 
-import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { ChevronRight } from 'lucide-react'
 import { CompanyLogo } from './CompanyLogos'
+
+function TypedWord({ word, startDelay = 600, charDelay = 90 }: { word: string; startDelay?: number; charDelay?: number }) {
+  const [displayed, setDisplayed] = useState('')
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = []
+    word.split('').forEach((_, i) => {
+      timers.push(setTimeout(() => {
+        setDisplayed(word.slice(0, i + 1))
+        if (i === word.length - 1) setDone(true)
+      }, startDelay + i * charDelay))
+    })
+    return () => timers.forEach(clearTimeout)
+  }, [word, startDelay, charDelay])
+
+  return (
+    <>
+      {displayed}
+      {!done && <span className="token-cursor">▌</span>}
+    </>
+  )
+}
 
 const companies = ['Anthropic', 'NVIDIA', 'Microsoft', 'AWS', 'Apple', 'AnyScale', 'Red Hat', 'Mastercard']
 
@@ -27,15 +50,7 @@ export default function Hero() {
           <span className="hero-word">Master</span>
           <span className="hero-word">LLM</span>
           <span className="hero-word text-gradient" aria-label="Inference">
-            {'Inference'.split('').map((letter, i) => (
-              <span
-                key={i}
-                className="token-letter"
-                style={{ animationDelay: `${0.6 + i * 0.09}s` }}
-              >
-                {letter}
-              </span>
-            ))}
+            <TypedWord word="Inference" />
           </span>
           <span className="hero-word">Engineering.</span>
         </h1>
