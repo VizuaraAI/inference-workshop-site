@@ -26,7 +26,17 @@ export default function Hero() {
         <h1 className="headline-xl mb-6" style={{ color: '#1d1d1f' }}>
           <span className="hero-word">Master</span>
           <span className="hero-word">LLM</span>
-          <span className="hero-word text-gradient">Inference</span>
+          <span className="hero-word text-gradient" aria-label="Inference">
+            {'Inference'.split('').map((letter, i) => (
+              <span
+                key={i}
+                className="token-letter"
+                style={{ animationDelay: `${0.6 + i * 0.09}s` }}
+              >
+                {letter}
+              </span>
+            ))}
+          </span>
           <span className="hero-word">Engineering.</span>
         </h1>
 

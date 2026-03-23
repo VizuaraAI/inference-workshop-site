@@ -1,16 +1,10 @@
 'use client'
 
 import { X, ShoppingCart, Trash2, ChevronRight } from 'lucide-react'
-import { useCart, CART_ITEMS, formatPrice, CartItemId } from '@/contexts/CartContext'
-
-// Map cart combinations to enrollment URLs (dummy for now)
-function getEnrollUrl(items: Set<CartItemId>): string {
-  const sorted = Array.from(items).sort().join('+')
-  return `#enroll/${sorted}`
-}
+import { useCart, CART_ITEMS, formatPrice } from '@/contexts/CartContext'
 
 export default function CartSidebar() {
-  const { items, toggle, total, isOpen, setIsOpen } = useCart()
+  const { items, toggle, total, isOpen, setIsOpen, enrollUrl } = useCart()
 
   const hasBase = items.has('phase1') || items.has('phase2')
 
@@ -87,7 +81,7 @@ export default function CartSidebar() {
               <span className="text-2xl font-black text-gray-900">{formatPrice(total)}</span>
             </div>
             <a
-              href={getEnrollUrl(items)}
+              href={enrollUrl}
               className="btn-pink w-full justify-center text-base py-3"
             >
               Proceed to Enroll <ChevronRight size={16} />

@@ -66,6 +66,46 @@ interface CartContextType {
   enrollUrl: string
 }
 
+const COURSE_BASE = 'https://vizuara.ai/courses'
+const BUNDLE_BASE = 'https://vizuara.ai/course-bundle'
+
+const ENROLL_URL_MAP: Record<string, string> = {
+  // Single items
+  'phase1':                            `${COURSE_BASE}/course_20006357`,
+  'phase2':                            `${COURSE_BASE}/course_20006404`,
+  'phase1,phase2':                     `${COURSE_BASE}/course_20006441`,
+  'speakers':                          `${COURSE_BASE}/course_20006463`,
+  'hardware':                          `${COURSE_BASE}/course_20006483`,
+  'research':                          `${COURSE_BASE}/course_20006533`,
+  'mentorship':                        `${COURSE_BASE}/course_20006579`,
+
+  // 2-item bundles
+  'phase1,speakers':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-guest-speaker-pass`,
+  'hardware,phase1':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-hardware-labs`,
+  'phase2,speakers':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-2-guest-speaker-pass`,
+  'hardware,phase2':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-2-hardware-labs`,
+  'mentorship,phase1':                 `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-1-1-research-mentorship-2-months-yash-dixit`,
+
+  // 3-item bundles
+  'phase1,phase2,speakers':            `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-guest-speaker-pass`,
+  'hardware,phase1,phase2':            `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-hardware-labs`,
+  'phase1,phase2,research':            `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-research-roadmap-code-starter`,
+  'mentorship,phase1,phase2':          `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-1-1-research-mentorship-2-months-yash-dixit`,
+
+  // 4-item bundles
+  'hardware,phase1,phase2,speakers':   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-guest-speaker-pass-hardware-labs`,
+}
+
+function getEnrollUrl(items: Set<CartItemId>): string {
+  const key = Array.from(items).sort().join(',')
+  if (ENROLL_URL_MAP[key]) return ENROLL_URL_MAP[key]
+  // Fallback to the most relevant base course
+  if (items.has('phase1') && items.has('phase2')) return `${COURSE_BASE}/course_20006441`
+  if (items.has('phase1')) return `${COURSE_BASE}/course_20006357`
+  if (items.has('phase2')) return `${COURSE_BASE}/course_20006404`
+  return '#enroll'
+}
+
 const CartContext = createContext<CartContextType | null>(null)
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
@@ -89,8 +129,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const total = Array.from(items).reduce((sum, id) => sum + CART_ITEMS[id].price, 0)
 
-  // Generate enrollment URL slug from cart contents
-  const enrollUrl = '#enroll-' + Array.from(items).sort().join('-')
+  // Generate enrollment URL based on cart contents
+  const enrollUrl = getEnrollUrl(items)
 
   return (
     <CartContext.Provider value={{ items, toggle, has, total, isOpen, setIsOpen, enrollUrl }}>
