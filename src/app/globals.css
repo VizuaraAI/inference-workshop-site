@@ -39,16 +39,15 @@ body {
 }
 
 /* ── Token-generation letter animation ── */
-@keyframes token-pop {
-  0%   { opacity: 0; transform: translateY(6px) scale(0.85); filter: blur(4px); }
-  60%  { opacity: 1; transform: translateY(-1px) scale(1.04); filter: blur(0); }
-  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+@keyframes token-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .token-letter {
-  display: inline-block;
+  display: inline;
   opacity: 0;
-  animation: token-pop 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: token-fade 0.18s ease forwards;
 }
 
 /* ── Scroll reveal animations (Apple-style) ── */
