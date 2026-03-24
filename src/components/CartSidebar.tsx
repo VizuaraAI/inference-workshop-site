@@ -93,7 +93,7 @@ export default function CartSidebar() {
               Proceed to Enroll <ChevronRight size={16} />
             </a>
             <p className="text-center text-xs text-gray-400">
-              Secure payment · EMI available · 7-day refund
+              Secure payment · EMI available · No refunds
             </p>
           </div>
         )}

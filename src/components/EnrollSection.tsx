@@ -317,7 +317,7 @@ export default function EnrollSection() {
               )}
 
               <p className="text-center text-[11px] text-[#86868b] mt-3">
-                EMI available · 7-day refund policy
+                EMI available · No refunds
               </p>
             </div>
           </div>

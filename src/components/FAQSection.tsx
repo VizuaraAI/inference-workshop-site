@@ -25,7 +25,7 @@ const faqGroups = [
       },
       {
         q: 'What is the refund policy?',
-        a: 'We offer a 7-day refund from the date of purchase if you are not satisfied. After the first live session you attend, refunds are at our discretion.',
+        a: 'All sales are final. We do not offer refunds. Please review the curriculum, sample content, and FAQs carefully before enrolling to make sure this workshop is the right fit for you.',
       },
     ],
   },
