@@ -88,6 +88,11 @@ const ENROLL_URL_MAP: Record<string, string> = {
   'phase1,phase2,research':            `${BUNDLE_BASE}/bundle_10003900`,
   'mentorship,phase1,phase2':          `${BUNDLE_BASE}/bundle_10004000`,
 
+  // 4-item bundles
+  'phase1,phase2,research,speakers':   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-guest-speaker-pass-research-roadmap-starter-kit`,
+  'mentorship,phase1,phase2,speakers': `${BUNDLE_BASE}/bundle_10003710`,
+  'mentorship,phase1,phase2,research': `${BUNDLE_BASE}/bundle_10003900`,
+
   // The entire bundle (20% discount)
   'mentorship,phase1,phase2,research,speakers': `${BUNDLE_BASE}/bundle_10004342`,
 }
@@ -109,8 +114,8 @@ function getDiscount(items: Set<CartItemId>): number {
   // Entire bundle: original 215,000 → 172,000 (save 43,000)
   if (hasAll) return 43000
 
-  // Phase 1 + Phase 2 only (exactly these two, no add-ons): save 20,000
-  if (items.has('phase1') && items.has('phase2') && items.size === 2) return 20000
+  // Whenever both phases are selected: save 20,000
+  if (items.has('phase1') && items.has('phase2')) return 20000
 
   return 0
 }
