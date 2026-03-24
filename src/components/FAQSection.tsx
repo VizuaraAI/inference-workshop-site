@@ -30,27 +30,52 @@ const faqGroups = [
     ],
   },
   {
-    group: 'Hardware',
+    group: 'Research Starter Kit',
     faqs: [
       {
-        q: 'What hardware do I need?',
-        a: 'Hardware labs are included in Phase 1 and Phase 2 at no extra cost. You will need: (1) Your own laptop or PC (any OS) for Lab Day 1, (2) Raspberry Pi 4 Model B for Lab Day 2, and (3) Any Android 10+ phone with 6GB+ RAM for Lab Day 3. The Jetson Orin Nano demo is to be decided — if confirmed, Dr. Raj will demo it live so you do not need to purchase one.',
+        q: 'How does the Research Starter Kit work?',
+        a: 'It\'s fully asynchronous. You tell us your topic of interest, and we generate a personalised 8-week research roadmap (PDF) and an initial version of your research paper — complete with research questions, methodology, related work, and experiment setup. Everything is delivered to you so you can start building on it immediately.',
       },
       {
-        q: 'Do I need to buy a Jetson Orin Nano?',
-        a: 'No. The Jetson Orin Nano is optional and a bit expensive. If the demo session is confirmed, Dr. Raj will run it live so you can follow along without owning the hardware. If you want to purchase one for your own experiments, you can find it on Amazon.',
+        q: 'What do I get in the research roadmap?',
+        a: 'A structured 8-week plan with milestones, deliverables, acceptance criteria, a curated reading list of 12–15 papers, experiment design, and a manuscript timeline — all tailored to your specific research topic. See the sample roadmap on our site for a real example.',
       },
       {
-        q: 'Which Raspberry Pi model should I buy?',
-        a: 'We use the Raspberry Pi 4 Model B. It features a 1.5GHz Quad-core Cortex-A72 (BCM2711), up to 8GB LPDDR4 RAM, dual-band Wi-Fi, Bluetooth 5.0, Gigabit Ethernet, and 2x USB 3.0 ports. You can buy it on Amazon.in.',
+        q: 'What is the initial research paper draft?',
+        a: 'We generate a 6–8 page publication-quality scaffold based on your topic: research questions framed, methodology outlined, related work surveyed, and experiment setup defined. You don\'t start with a blank page — you start with a paper draft that\'s ready to build on.',
       },
       {
-        q: 'Is hardware included in the workshop fee?',
-        a: 'Hardware lab sessions (instruction, lab guides, and live sessions) are included in Phase 1 and Phase 2 — there is no separate fee for lab access. However, you do need to purchase the physical hardware devices yourself. You keep them after the workshop for continued experimentation.',
+        q: 'Do I need to attend any live sessions for the Research Starter Kit?',
+        a: 'No. The Research Starter Kit is entirely asynchronous. You submit your topic of interest, and we deliver the roadmap, paper draft, reading list, and starter code to you. No calls or scheduling required.',
       },
       {
-        q: 'When should I order the hardware?',
-        a: 'Order as soon as you enroll. Lab Day 1 starts the first weekend of your phase. Depending on your location, hardware can take 1–2 weeks to arrive. We recommend ordering at least 2–3 weeks before the workshop start date (Apr 27).',
+        q: 'Can I choose any research topic?',
+        a: 'Yes, as long as it\'s related to LLM inference, edge deployment, or the broader topics covered in the workshop. Examples include speculative decoding, KV cache compression, knowledge distillation for edge, multimodal inference pipelines, and more. We tailor everything to your specific area of interest.',
+      },
+    ],
+  },
+  {
+    group: 'Research Mentorship with Yash Dixit',
+    faqs: [
+      {
+        q: 'How does the 1:1 mentorship work?',
+        a: 'You get one live 1:1 call with Yash Dixit every two weeks for 2 months (4 sessions total). Each session, Yash reviews your progress, gives direct feedback, and sets the direction for your next two-week sprint. The goal is to guide you through every step of the research process towards a publishable paper.',
+      },
+      {
+        q: 'What is the goal of the mentorship?',
+        a: 'To produce a publishable research paper. Yash will guide you from topic selection and literature review through experiment design, ablation studies, and writing — all the way to a publication-ready manuscript.',
+      },
+      {
+        q: 'Who is Yash Dixit?',
+        a: 'Yash is an AI/ML Product Manager at Apple with experience at McKinsey, MIT, and IIT. He brings a unique perspective combining deep technical AI/ML knowledge with product thinking and career strategy at the highest levels.',
+      },
+      {
+        q: 'Are the mentorship sessions live or asynchronous?',
+        a: 'Live. You have a synchronous 1:1 video call with Yash every two weeks. These are real-time conversations where he reviews your work, discusses your ideas, and helps you think through research decisions.',
+      },
+      {
+        q: 'Can I get both the Research Starter Kit and the Mentorship?',
+        a: 'Yes, and they complement each other well. The Research Starter Kit gives you the roadmap and initial paper draft to get started immediately. The Mentorship with Yash then provides ongoing live guidance as you execute on that plan and work towards publication.',
       },
     ],
   },

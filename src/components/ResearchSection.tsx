@@ -106,8 +106,9 @@ function ResearchKitSection() {
           <span className="text-gradient">with a head start.</span>
         </h2>
         <p className="subhead max-w-2xl mx-auto">
-          Don&apos;t start from scratch. Get a personalised research roadmap tailored to your background,
-          a curated reading list, and an initial research draft — so you can hit the ground running.
+          Don&apos;t start from scratch. Tell us your topic of interest and we&apos;ll generate a personalised
+          research roadmap and an initial version of your research paper — delivered asynchronously,
+          so you can hit the ground running from day one.
         </p>
       </div>
 
@@ -122,12 +123,12 @@ function ResearchKitSection() {
               {
                 icon: <FileText size={18} className="text-pink-500" />,
                 title: 'Personalised Research Roadmap (PDF)',
-                desc: 'An 8-week structured plan with milestones, deliverables, and acceptance criteria — tailored to your specific research interest. Includes literature review scope, data pipeline design, experiment matrix, and manuscript timeline.',
+                desc: 'You tell us your topic of interest. We generate an 8-week structured plan with milestones, deliverables, and acceptance criteria — tailored to your specific research area. Includes literature review scope, data pipeline design, experiment matrix, and manuscript timeline. Delivered asynchronously.',
               },
               {
                 icon: <BookOpen size={18} className="text-blue-500" />,
-                title: 'Initial Research Draft',
-                desc: 'A publication-quality starting draft with your research questions framed, methodology outlined, related work surveyed, and experiment setup defined. You don\'t start with a blank page — you start with a 6–8 page scaffold ready to build on.',
+                title: 'Initial Research Paper Draft',
+                desc: 'We generate an initial version of your research paper — research questions framed, methodology outlined, related work surveyed, and experiment setup defined. You don\'t start with a blank page — you start with a 6–8 page scaffold ready to build on. Delivered asynchronously based on your topic.',
               },
               {
                 icon: <GraduationCap size={18} className="text-purple-500" />,
@@ -214,9 +215,9 @@ function MentorshipSection() {
           <span className="text-gradient">an Apple AI leader.</span>
         </h2>
         <p className="subhead max-w-2xl mx-auto">
-          Two months of synchronous 1:1 mentorship with Yash Dixit.
-          Not pre-recorded advice — real-time, personalised sessions where he reviews your work
-          and helps you navigate your AI research and career.
+          Two months of 1:1 mentorship with Yash Dixit. One live call every two weeks —
+          where he reviews your progress, guides your next steps, and helps you work towards
+          a publishable research paper. He will guide you through every step of the research process.
         </p>
       </div>
 
@@ -255,11 +256,11 @@ function MentorshipSection() {
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
-                { title: 'Bi-weekly 1:1 Calls', desc: '4 synchronous sessions over 2 months. Yash personally reviews your work, gives feedback, and sets direction for the next sprint.', accent: '#E91E8C' },
-                { title: 'Personalised Research Roadmap', desc: 'A research plan tailored to your background, interests, and career goals — not a generic template.', accent: '#7C3AED' },
-                { title: 'Paper Reading Guidance', desc: 'Curated reading lists, paper discussion, and feedback on how to extract and apply insights from the literature.', accent: '#3B82F6' },
+                { title: '1:1 Call Every Two Weeks', desc: '4 live sessions over 2 months. Yash personally reviews your progress, gives feedback, and sets the direction for your next two-week sprint.', accent: '#E91E8C' },
+                { title: 'Target: Publishable Paper', desc: 'The goal is a research paper. Yash will guide you from topic selection through experiments to a publication-ready manuscript.', accent: '#7C3AED' },
+                { title: 'Every Step Guided', desc: 'Literature review, experiment design, ablation studies, writing — Yash walks you through every step of the research process so you never feel stuck.', accent: '#3B82F6' },
                 { title: 'Career Strategy', desc: 'Inside view of AI roles at Apple, McKinsey, and top labs. How to position yourself, what hiring managers look for, and how to stand out.', accent: '#22C55E' },
-                { title: 'Research Feedback', desc: 'Direct, actionable feedback on your drafts, experiments, and ideas — from someone who\'s shipped AI products at the world\'s most valuable company.', accent: '#FF6B35' },
+                { title: 'Paper Reading Guidance', desc: 'Curated reading lists, paper discussion, and feedback on how to extract and apply insights from the literature.', accent: '#FF6B35' },
                 { title: 'Actionable Next Steps', desc: 'Every session ends with clear deliverables and deadlines. You always know exactly what to do next.', accent: '#EAB308' },
               ].map(item => (
                 <div key={item.title} className="p-4 rounded-xl border border-[#e8e8ed] bg-[#f9f9fb]">
@@ -271,21 +272,6 @@ function MentorshipSection() {
             </div>
           </div>
 
-          {/* Testimonial-style callout */}
-          <div className="rounded-2xl p-5 border-2 border-purple-100 bg-gradient-to-r from-purple-50 to-pink-50" data-reveal>
-            <div className="flex items-center gap-3 mb-3">
-              <img src={YASH_PHOTO} alt="Yash Dixit" className="w-10 h-10 rounded-full object-cover" />
-              <div>
-                <p className="text-sm font-bold text-[#1d1d1f]">Synchronous, not asynchronous</p>
-                <p className="text-xs text-[#86868b]">Real-time sessions, not email exchanges</p>
-              </div>
-            </div>
-            <p className="text-sm text-[#4a4a4a] leading-relaxed">
-              Yash will personally mentor you through live video calls — reviewing your code, reading your drafts,
-              and helping you think through research decisions in real time. This is the kind of mentorship that
-              usually requires being at MIT or working at Apple. Now it&apos;s available to you.
-            </p>
-          </div>
         </div>
       </div>
     </div>
