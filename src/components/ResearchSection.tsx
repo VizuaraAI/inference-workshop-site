@@ -11,7 +11,7 @@ const SAMPLE_PAPER_URL = 'https://drive.google.com/file/d/1koIk3TdIbRUWj6DCK915v
 // ── Roadmap preview card ──
 function RoadmapPreview() {
   return (
-    <div className="rounded-2xl border border-[#e8e8ed] bg-[#f9f9fb] p-5">
+    <div className="rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-sm">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center">
           <FileText size={18} className="text-pink-600" />
@@ -55,7 +55,7 @@ function RoadmapPreview() {
 // ── Paper preview card ──
 function PaperPreview() {
   return (
-    <div className="rounded-2xl border border-[#e8e8ed] bg-[#f9f9fb] p-5">
+    <div className="rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-sm">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
           <BookOpen size={18} className="text-blue-600" />
@@ -194,7 +194,7 @@ function ResearchKitSection() {
 
       {/* Sample previews */}
       {showSamples && (
-        <div className="grid md:grid-cols-2 gap-6" data-reveal>
+        <div className="grid md:grid-cols-2 gap-6">
           <RoadmapPreview />
           <PaperPreview />
         </div>
