@@ -34,7 +34,7 @@ const faqGroups = [
     faqs: [
       {
         q: 'How does the Research Starter Kit work?',
-        a: 'It\'s fully asynchronous. You tell us your topic of interest, and we generate a personalised 8-week research roadmap (PDF) and an initial version of your research paper — complete with research questions, methodology, related work, and experiment setup. Everything is delivered to you so you can start building on it immediately.',
+        a: 'It\'s fully asynchronous. You tell us your topic of interest, and we generate a personalised 8-week research roadmap (PDF), an initial version of your research paper — complete with research questions, methodology, related work, and experiment setup — and a ready-to-run starter code notebook (Google Colab) with data loading, training loop, and evaluation pipeline. Everything is delivered to you so you can start building on it immediately.',
       },
       {
         q: 'What do I get in the research roadmap?',
