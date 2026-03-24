@@ -299,15 +299,14 @@ export default function EnrollSection() {
               <a
                 href={hasBase ? enrollUrl : '#enroll'}
                 onClick={!hasBase ? e => e.preventDefault() : undefined}
-                className={`w-full flex items-center justify-center gap-2 font-bold text-lg py-4 rounded-2xl transition-all ${hasBase ? 'text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]' : 'opacity-40 cursor-not-allowed bg-gray-300 text-gray-500'}`}
-                style={hasBase ? { background: 'var(--ai-gradient-diag)', borderRadius: 16 } : { borderRadius: 16 }}
+                className={`w-full flex items-center justify-center gap-2 font-bold text-lg py-4 rounded-2xl transition-all ${hasBase ? 'bg-pink-600 text-white shadow-lg shadow-pink-200 hover:bg-pink-700 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]' : 'opacity-40 cursor-not-allowed bg-gray-200 text-gray-400'}`}
+                style={{ borderRadius: 16 }}
               >
-                {hasBase ? 'Enroll Now' : 'Select a phase first'}
-                {hasBase && <ChevronRight size={20} strokeWidth={2.5}/>}
+                {hasBase ? 'Enroll Now →' : 'Select a phase first'}
               </a>
               {hasBase && (
                 <p className="text-[11px] text-center text-[#6e6e73] mt-2">
-                  You will be redirected to our secure payment page.
+                  Secure checkout · You will be redirected to our payment page.
                 </p>
               )}
 
