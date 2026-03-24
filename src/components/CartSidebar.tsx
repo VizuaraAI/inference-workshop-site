@@ -88,7 +88,7 @@ export default function CartSidebar() {
             </div>
             <a
               href={enrollUrl}
-              className="btn-pink w-full justify-center text-base py-3"
+              className="w-full flex items-center justify-center gap-2 bg-pink-600 text-white font-bold text-base py-3.5 rounded-2xl shadow-lg shadow-pink-200 hover:bg-pink-700 hover:shadow-xl transition-all"
             >
               Proceed to Enroll <ChevronRight size={16} />
             </a>
