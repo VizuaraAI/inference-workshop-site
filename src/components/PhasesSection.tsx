@@ -190,18 +190,14 @@ function JetsonIllustration() {
   )
 }
 
-const devices = [
-  { name: 'Your Own Laptop / PC', subtitle: 'Any OS · Lab Day 1', desc: 'Set up llama.cpp, run your first inference, benchmark tok/s across model sizes on your own machine.', color: '#6B7280', Illustration: LaptopIllustration, phase: 'Phase 1', phaseColor: '#E91E8C' },
-  { name: 'Raspberry Pi 4', subtitle: 'ARM · Lab Day 2', desc: 'Quantization experiments on ARM. Compare INT4 vs INT8 latency. Power-aware inference on a 1.5GHz Quad-core Cortex-A72.', color: '#22C55E', Illustration: RaspberryPiIllustration, phase: 'Phase 1', phaseColor: '#E91E8C' },
-  { name: 'Android Device', subtitle: 'Mobile · Lab Day 3', desc: 'SmolChat-Android live session with Shubham Panchal. Deploy a real LLM on your phone.', color: '#3B82F6', Illustration: AndroidIllustration, phase: 'Phase 2', phaseColor: '#7C3AED' },
-  { name: 'Jetson Orin Nano', subtitle: 'NVIDIA CUDA · Demo (To Be Decided)', desc: 'CUDA inference on edge GPU. TensorRT-LLM on Jetson. GPU vs CPU throughput battle. Demo by Dr. Raj — not yet confirmed.', color: '#EAB308', Illustration: JetsonIllustration, phase: 'Phase 2', phaseColor: '#7C3AED' },
-]
+const PI4_LINK = 'https://www.amazon.in/Raspberry-Pi-Model-Controller-Electronic/dp/B07XT1QJ4S'
+const JETSON_LINK = 'https://www.amazon.in/NVIDIA-Jetson-Orin-Nano-Developer/dp/B0BZJTQ5YP'
 
-const hardwareGuide = [
-  { name: 'Your Own Laptop / PC', note: 'Required · Any OS', desc: 'Lab Day 1 uses llama.cpp and benchmarking tools that run on any modern laptop or desktop — macOS, Windows, or Linux.', link: null, linkLabel: null, color: '#6B7280', required: true, ownedNote: 'You already have this' },
-  { name: 'Raspberry Pi 4 Model B', note: 'Required · 1.5GHz Quad-core, up to 8GB RAM', desc: 'Used in Lab Day 2 for ARM inference and quantization experiments. Broadcom BCM2711 SoC, dual-band Wi-Fi, Bluetooth 5.0, Gigabit Ethernet, 2x USB 3.0, 2x USB 2.0.', link: 'https://www.amazon.in/Raspberry-Pi-Model-Controller-Electronic/dp/B07XT1QJ4S/ref=sr_1_2?adgrpid=60451636313&dib=eyJ2IjoiMSJ9.MyyrXywvoO_Lp4MV9LeUQrWPQtLIkAqoa8MyYzD9PxHukNaUa25u-UM5sU-KXoXR82OjbL9w7L9oLRgSAV4HrCitLWPJLjvwuNjg9izqllds9stJSdgCEPX93PWVpXru6DvINKl722OAncFsGPZNhnClRqKcAtqrU2rSybahWkEms49eOmvURlzFfc_zxWaH0g3ws9Q6u2raxPL0HOr54o2TecB1w2QaodLUya1dRD0.OGVL7mSbRia9hMhrT5WMC7neoG2dowAAfCLVBhYdN0M&dib_tag=se&ext_vrnc=hi&hvadid=590712334307&hvdev=c&hvlocphy=9062088&hvnetw=g&hvqmt=e&hvrand=8055366264855012000&hvtargid=kwd-394774697183&hydadcr=24540_2265408&keywords=raspberry+pi+4+model+b&mcid=6470cf5ab0223bd3b82e1840bfd24f49&qid=1774340808&sr=8-2', linkLabel: 'Buy on Amazon.in', color: '#22C55E', required: true, ownedNote: null },
-  { name: 'Android Phone', note: 'Required · Any Android 10+', desc: 'Lab Day 3 with Shubham Panchal. Any Android 10+ phone with at least 6GB RAM works. You almost certainly already own one.', link: null, linkLabel: null, color: '#3B82F6', required: true, ownedNote: 'You likely already own this' },
-  { name: 'Jetson Orin Nano', note: 'Optional · Demo to be decided', desc: 'This is a bit expensive, so if you don\'t have it, it\'s fine — Dr. Raj will demo this live in the workshop. NVIDIA Ampere GPU, 8GB RAM, 1024-core CUDA. Demo session not yet confirmed.', link: 'https://www.amazon.in/NVIDIA-Jetson-Orin-Nano-Developer/dp/B0BZJTQ5YP/ref=sr_1_3?crid=U672CE2H1MM7&dib=eyJ2IjoiMSJ9.PBh_SxBbFez3MAafJsevx3UDcrZUy9TTtWmW468D5FoYphc2wQkwNQScYYsg9Jl8P3auLSn7YGUucjVIH4kbitBNEyzcoxDfPe_G_uqdJTuEC0fxkPpJW0_A8lYp6mnoXkyNpS-xLKELghbBXMcJ6wXsh9zKs9pvpRTTB06xIYwHY3BwZK6eNe4F3vdE8Nrmhi-ptCpx9ZTe0NIfnCvwPm0vFurpi_eEjP2X6LMLNMQ.qUYKsL3TyOa9bved_h9n7g9ddYNaSsmBoWynI5PPOSQ&dib_tag=se&keywords=jetson+orin+nano+super+developer+kit&qid=1774340896&sprefix=jetson+o%2Caps%2C351&sr=8-3', linkLabel: 'Buy on Amazon.in', color: '#76B900', required: false, ownedNote: null },
+const devices = [
+  { name: 'Your Own Laptop / PC', subtitle: 'Any OS · Lab Day 1', desc: 'Set up llama.cpp, run your first inference, benchmark tok/s across model sizes on your own machine.', color: '#6B7280', image: null, Illustration: LaptopIllustration, phase: 'Phase 1', phaseColor: '#E91E8C', link: null, note: 'You already have this' },
+  { name: 'Raspberry Pi 4', subtitle: 'ARM · Lab Day 2', desc: 'Quantization experiments on ARM. Compare INT4 vs INT8 latency. Power-aware inference. BCM2711 · Quad-core Cortex-A72 · up to 8GB LPDDR4.', color: '#22C55E', image: 'https://m.media-amazon.com/images/I/51MN7s3mkvL._SL1000_.jpg', Illustration: null, phase: 'Phase 1', phaseColor: '#E91E8C', link: PI4_LINK, note: null },
+  { name: 'Android Device', subtitle: 'Mobile · Lab Day 3', desc: 'SmolChat-Android live session with Shubham Panchal. Deploy a real LLM on your phone. Any Android 10+ with 6GB+ RAM.', color: '#3B82F6', image: null, Illustration: AndroidIllustration, phase: 'Phase 2', phaseColor: '#7C3AED', link: null, note: 'You likely already own this' },
+  { name: 'Jetson Orin Nano', subtitle: 'NVIDIA CUDA · Demo (To Be Decided)', desc: 'CUDA inference on edge GPU. TensorRT-LLM on Jetson. NVIDIA Ampere · 8GB RAM · 1024-core CUDA. Demo by Dr. Raj — not yet confirmed.', color: '#EAB308', image: 'https://m.media-amazon.com/images/I/61VBGhFErtL._SL1500_.jpg', Illustration: null, phase: 'Phase 2', phaseColor: '#7C3AED', link: JETSON_LINK, note: 'Optional — Dr. Raj will demo live' },
 ]
 
 export default function PhasesSection() {
@@ -249,7 +245,7 @@ export default function PhasesSection() {
             {devices.map((d, i) => (
               <div
                 key={d.name}
-                className="card rounded-2xl overflow-hidden group relative"
+                className="card rounded-2xl overflow-hidden group relative flex flex-col"
                 data-reveal="scale"
                 data-delay={String(i + 1)}
               >
@@ -264,7 +260,11 @@ export default function PhasesSection() {
                   className="w-full h-44 rounded-xl mb-4 flex items-center justify-center overflow-hidden"
                   style={{ background: `radial-gradient(ellipse at center, ${d.color}18, #f5f5f7)` }}
                 >
-                  <d.Illustration />
+                  {d.image ? (
+                    <img src={d.image} alt={d.name} className="h-36 w-auto object-contain" />
+                  ) : d.Illustration ? (
+                    <d.Illustration />
+                  ) : null}
                 </div>
                 <div className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: d.color }}>
                   {d.subtitle}
@@ -272,9 +272,25 @@ export default function PhasesSection() {
                 <h4 className="font-bold text-lg mb-2" style={{ letterSpacing: '-0.02em', color: '#1d1d1f' }}>
                   {d.name}
                 </h4>
-                <p className="text-sm leading-relaxed" style={{ color: '#86868b' }}>
+                <p className="text-sm leading-relaxed flex-1" style={{ color: '#86868b' }}>
                   {d.desc}
                 </p>
+                {/* Buy link or note */}
+                <div className="mt-3">
+                  {d.link ? (
+                    <a
+                      href={d.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg text-white transition-opacity hover:opacity-90"
+                      style={{ background: 'var(--ai-gradient-diag)' }}
+                    >
+                      Buy on Amazon.in →
+                    </a>
+                  ) : d.note ? (
+                    <p className="text-xs text-[#86868b] italic">{d.note}</p>
+                  ) : null}
+                </div>
               </div>
             ))}
           </div>
@@ -306,47 +322,6 @@ export default function PhasesSection() {
             </p>
           </div>
 
-          {/* Hardware purchase guide */}
-          <div className="mt-14" data-reveal>
-            <div className="rounded-2xl border border-[#e8e8ed] bg-[#f9f9fb] p-8">
-              <div className="label-pill">Hardware Guide</div>
-              <h3 className="text-xl font-bold text-[#1d1d1f] mb-2" style={{ letterSpacing: '-0.02em' }}>
-                What you need to get started
-              </h3>
-              <p className="text-sm text-[#6e6e73] mb-8 max-w-2xl">
-                Most labs run on hardware you already own. Only the Raspberry Pi 4 needs to be purchased separately. The Jetson Orin Nano is optional — Dr. Raj will demo it live if the session is confirmed.
-              </p>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {hardwareGuide.map(h => (
-                  <div key={h.name} className="p-4 rounded-xl border border-[#e8e8ed] bg-white">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="font-bold text-sm text-[#1d1d1f]">{h.name}</p>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${h.required ? 'bg-blue-50 text-blue-600' : 'bg-gray-100 text-gray-500'}`}>
-                        {h.required ? 'Required' : 'Optional'}
-                      </span>
-                    </div>
-                    <p className="text-[11px] font-medium mb-2" style={{ color: h.color }}>{h.note}</p>
-                    <p className="text-xs text-[#6e6e73] leading-relaxed mb-3">{h.desc}</p>
-                    <div className="flex flex-col gap-1.5">
-                      {h.link && (
-                        <a href={h.link} target="_blank" rel="noopener noreferrer"
-                          className="text-xs font-semibold px-3 py-1.5 rounded-lg text-center transition-colors"
-                          style={{ background: 'var(--ai-gradient-diag)', color: '#fff' }}>
-                          {h.linkLabel} →
-                        </a>
-                      )}
-                      {h.ownedNote && <p className="text-xs text-[#86868b] italic">{h.ownedNote}</p>}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-xs text-[#86868b] mt-6 text-center">
-                Hardware labs are included in Phase 1 and Phase 2 — no extra fee for lab access. Hardware devices must be purchased separately. Prices and availability vary by region.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
