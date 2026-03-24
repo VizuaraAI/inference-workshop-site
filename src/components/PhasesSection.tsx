@@ -195,9 +195,9 @@ const JETSON_LINK = 'https://www.amazon.in/NVIDIA-Jetson-Orin-Nano-Developer/dp/
 
 const devices = [
   { name: 'Your Own Laptop / PC', subtitle: 'Any OS · Lab Day 1', desc: 'Set up llama.cpp, run your first inference, benchmark tok/s across model sizes on your own machine.', color: '#6B7280', image: null, Illustration: LaptopIllustration, phase: 'Phase 1', phaseColor: '#E91E8C', link: null, note: 'You already have this' },
-  { name: 'Raspberry Pi 4', subtitle: 'ARM · Lab Day 2', desc: 'Quantization experiments on ARM. Compare INT4 vs INT8 latency. Power-aware inference. BCM2711 · Quad-core Cortex-A72 · up to 8GB LPDDR4.', color: '#22C55E', image: 'https://m.media-amazon.com/images/I/51MN7s3mkvL._SL1000_.jpg', Illustration: null, phase: 'Phase 1', phaseColor: '#E91E8C', link: PI4_LINK, note: null },
+  { name: 'Raspberry Pi 4', subtitle: 'ARM · Lab Day 2', desc: 'Quantization experiments on ARM. Compare INT4 vs INT8 latency. Power-aware inference. BCM2711 · Quad-core Cortex-A72 · up to 8GB LPDDR4.', color: '#22C55E', image: '/raspberry-pi-4.jpg', Illustration: null, phase: 'Phase 1', phaseColor: '#E91E8C', link: PI4_LINK, note: null },
   { name: 'Android Device', subtitle: 'Mobile · Lab Day 3', desc: 'SmolChat-Android live session with Shubham Panchal. Deploy a real LLM on your phone. Any Android 10+ with 6GB+ RAM.', color: '#3B82F6', image: null, Illustration: AndroidIllustration, phase: 'Phase 2', phaseColor: '#7C3AED', link: null, note: 'You likely already own this' },
-  { name: 'Jetson Orin Nano', subtitle: 'NVIDIA CUDA · Demo (To Be Decided)', desc: 'CUDA inference on edge GPU. TensorRT-LLM on Jetson. NVIDIA Ampere · 8GB RAM · 1024-core CUDA. Demo by Dr. Raj — not yet confirmed.', color: '#EAB308', image: 'https://m.media-amazon.com/images/I/61VBGhFErtL._SL1500_.jpg', Illustration: null, phase: 'Phase 2', phaseColor: '#7C3AED', link: JETSON_LINK, note: 'Optional — Dr. Raj will demo live' },
+  { name: 'Jetson Orin Nano', subtitle: 'NVIDIA CUDA · Demo (To Be Decided)', desc: 'CUDA inference on edge GPU. TensorRT-LLM on Jetson. NVIDIA Ampere · 8GB RAM · 1024-core CUDA. Demo by Dr. Raj — not yet confirmed.', color: '#EAB308', image: '/jetson-orin-nano.jpg', Illustration: null, phase: 'Phase 2', phaseColor: '#7C3AED', link: JETSON_LINK, note: 'Optional — Dr. Raj will demo live' },
 ]
 
 export default function PhasesSection() {
