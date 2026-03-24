@@ -251,8 +251,8 @@ export default function EnrollSection() {
                   Phase 1 + Phase 2 + Guest Speaker Pass + Research Roadmap + Mentorship
                 </p>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xs text-[#86868b] line-through">{formatPrice(215000)}</span>
-                  <span className="text-lg font-bold text-pink-600">{formatPrice(172000)}</span>
+                  <span className="text-xs text-[#86868b] line-through">{formatPrice(195000)}</span>
+                  <span className="text-lg font-bold text-pink-600">{formatPrice(156000)}</span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-600">SAVE 20%</span>
                   <span className="text-[11px] font-semibold text-pink-500 ml-auto">Click to select all →</span>
                 </div>

@@ -111,8 +111,8 @@ function getDiscount(items: Set<CartItemId>): number {
   const all: CartItemId[] = ['phase1', 'phase2', 'speakers', 'research', 'mentorship']
   const hasAll = all.every(id => items.has(id))
 
-  // Entire bundle: original 215,000 → 172,000 (save 43,000)
-  if (hasAll) return 43000
+  // Entire bundle: original 195,000 (with phase discount) → 156,000 (20% off = save 39,000)
+  if (hasAll) return 59000
 
   // Whenever both phases are selected: save 20,000
   if (items.has('phase1') && items.has('phase2')) return 20000
