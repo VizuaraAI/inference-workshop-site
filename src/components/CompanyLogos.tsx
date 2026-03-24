@@ -27,17 +27,14 @@ export function NvidiaLogo({ height = 22, dark = false }: { height?: number; dar
 }
 
 export function MicrosoftLogo({ height = 22, dark = false }: { height?: number; dark?: boolean }) {
-  const sq = height * 0.43
-  const gap = height * 0.07
-  const totalW = sq * 2 + gap
   const txt = dark ? '#d0d0d0' : '#737373'
   return (
-    <svg height={height} width={totalW + 62} viewBox={`0 0 ${totalW + 62} ${height}`} fill="none">
-      <rect x="0" y="0" width={sq} height={sq} fill="#F35325"/>
-      <rect x={sq + gap} y="0" width={sq} height={sq} fill="#81BC06"/>
-      <rect x="0" y={sq + gap} width={sq} height={sq} fill="#05A6F0"/>
-      <rect x={sq + gap} y={sq + gap} width={sq} height={sq} fill="#FFBA08"/>
-      <text x={totalW + 7} y={height * 0.72} fontFamily="-apple-system,BlinkMacSystemFont,sans-serif" fontWeight="600" fontSize={height * 0.58} fill={txt}>Microsoft</text>
+    <svg height={height} viewBox="0 0 100 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="1" width="9" height="9" fill="#F35325"/>
+      <rect x="10.5" y="1" width="9" height="9" fill="#81BC06"/>
+      <rect x="0" y="11.5" width="9" height="9" fill="#05A6F0"/>
+      <rect x="10.5" y="11.5" width="9" height="9" fill="#FFBA08"/>
+      <text x="25" y="16" fontFamily="-apple-system,BlinkMacSystemFont,sans-serif" fontWeight="600" fontSize="12.5" fill={txt}>Microsoft</text>
     </svg>
   )
 }
@@ -45,9 +42,9 @@ export function MicrosoftLogo({ height = 22, dark = false }: { height?: number; 
 export function AWSLogo({ height = 22, dark = false }: { height?: number; dark?: boolean }) {
   const txt = dark ? '#f5f5f7' : '#232F3E'
   return (
-    <svg height={height} width={height * 3} viewBox="0 0 66 22" fill="none">
-      <text x="0" y="14" fontFamily="-apple-system,BlinkMacSystemFont,sans-serif" fontWeight="800" fontSize="15" fill={txt} letterSpacing="0.8">aws</text>
-      <path d="M1 18 Q33 24 65 18" stroke="#FF9900" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+    <svg height={height} viewBox="0 0 46 22" fill="none">
+      <text x="3" y="14" fontFamily="-apple-system,BlinkMacSystemFont,sans-serif" fontWeight="800" fontSize="15" fill={txt} letterSpacing="0.8">aws</text>
+      <path d="M3 18 Q23 23 43 18" stroke="#FF9900" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
     </svg>
   )
 }
