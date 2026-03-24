@@ -100,7 +100,7 @@ const faqGroups = [
       },
       {
         q: 'Are guest speaker sessions included in the base phase fee?',
-        a: 'No. The Guest Speaker Pass (₹30,000) is a separate add-on that gives you access to all 9 industry sessions. It is optional but highly recommended if you are targeting roles at top AI companies — the career insights and networking alone are worth it.',
+        a: 'No. The Guest Speaker Pass ($323 / ₹30,000) is a separate add-on that gives you access to all 9 industry sessions. It is optional but highly recommended if you are targeting roles at top AI companies — the career insights and networking alone are worth it.',
       },
     ],
   },

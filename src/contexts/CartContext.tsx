@@ -168,6 +168,9 @@ export function useCart() {
   return ctx
 }
 
+const INR_TO_USD = 93
+
 export function formatPrice(amount: number) {
-  return '₹' + amount.toLocaleString('en-IN')
+  const usd = Math.round(amount / INR_TO_USD)
+  return `$${usd.toLocaleString('en-US')} (₹${amount.toLocaleString('en-IN')})`
 }

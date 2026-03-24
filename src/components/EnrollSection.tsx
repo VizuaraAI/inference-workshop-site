@@ -206,7 +206,7 @@ export default function EnrollSection() {
                 />
               </div>
               <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7] text-xs text-[#6e6e73] text-center">
-                Take both phases and save {formatPrice(20000)} — pay just {formatPrice(80000)} combined (20% off).
+                Take both phases and save $215 (₹20,000) — pay just $860 (₹80,000) combined (20% off).
               </div>
             </div>
 
@@ -250,12 +250,13 @@ export default function EnrollSection() {
                 <p className="text-xs text-[#6e6e73] mb-2">
                   Phase 1 + Phase 2 + Guest Speaker Pass + Research Roadmap + Mentorship
                 </p>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xs text-[#86868b] line-through">{formatPrice(195000)}</span>
-                  <span className="text-lg font-bold text-pink-600">{formatPrice(156000)}</span>
+                <div className="flex items-baseline gap-2 flex-wrap mb-1">
+                  <span className="text-lg font-bold text-pink-600">$1,677</span>
+                  <span className="text-xs text-[#86868b] line-through">$2,097</span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-600">SAVE 27%</span>
                   <span className="text-[11px] font-semibold text-pink-500 ml-auto">Click to select all →</span>
                 </div>
+                <p className="text-[11px] text-[#86868b]">₹1,56,000 <span className="line-through">₹1,95,000</span></p>
               </button>
             </div>
           </div>
@@ -289,11 +290,16 @@ export default function EnrollSection() {
                 </div>
               )}
 
-              <div className="flex justify-between items-baseline mb-5">
-                <span className="text-sm text-[#6e6e73]">Total</span>
-                <span className="text-3xl font-bold" style={{ letterSpacing: '-0.03em' }}>
-                  {total > 0 ? formatPrice(total) : '—'}
-                </span>
+              <div className="mb-5">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-sm text-[#6e6e73]">Total</span>
+                  <span className="text-2xl font-bold" style={{ letterSpacing: '-0.03em' }}>
+                    {total > 0 ? `$${Math.round(total / 93).toLocaleString('en-US')}` : '—'}
+                  </span>
+                </div>
+                {total > 0 && (
+                  <p className="text-right text-xs text-[#86868b]">₹{total.toLocaleString('en-IN')}</p>
+                )}
               </div>
 
               <a

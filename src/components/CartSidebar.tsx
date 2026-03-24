@@ -82,9 +82,12 @@ export default function CartSidebar() {
                 <span className="text-sm font-bold">-{formatPrice(discount)}</span>
               </div>
             )}
-            <div className="flex items-center justify-between">
-              <span className="text-gray-600 font-medium">Total</span>
-              <span className="text-2xl font-black text-gray-900">{formatPrice(total)}</span>
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600 font-medium">Total</span>
+                <span className="text-2xl font-black text-gray-900">${Math.round(total / 93).toLocaleString('en-US')}</span>
+              </div>
+              <p className="text-right text-xs text-gray-400">₹{total.toLocaleString('en-IN')}</p>
             </div>
             <a
               href={enrollUrl}
