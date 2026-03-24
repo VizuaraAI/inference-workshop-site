@@ -21,7 +21,7 @@ const faqGroups = [
       },
       {
         q: 'Is EMI available?',
-        a: 'Yes. EMI options are available at checkout for most payment combinations. Contact us for details.',
+        a: 'Yes. Our payment gateway offers EMI options at checkout. You can choose an EMI plan that works for you during the payment process.',
       },
       {
         q: 'What is the refund policy?',
