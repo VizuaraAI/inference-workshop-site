@@ -7,6 +7,8 @@ const YASH_PHOTO = 'https://media.licdn.com/dms/image/v2/D4E03AQHH3cCdo2E1iA/pro
 
 const SAMPLE_ROADMAP_URL = 'https://drive.google.com/file/d/1a_BfVlH1cVZehGg3enuyMUCmhFmQdPmF/view?usp=sharing'
 const SAMPLE_PAPER_URL = 'https://drive.google.com/file/d/1koIk3TdIbRUWj6DCK915vIkORp8s0cO4/view?usp=sharing'
+const SAMPLE_COLAB_URL = 'https://drive.google.com/file/d/1ZjTz4f63EEcCzt2xe4v3LvJQiVypl_um/view?usp=sharing'
+const COLAB_BADGE = 'https://colab.research.google.com/assets/colab-badge.svg'
 
 // ── Roadmap preview card ──
 function RoadmapPreview() {
@@ -88,6 +90,58 @@ function PaperPreview() {
         style={{ background: 'linear-gradient(135deg, #3B82F6, #6366F1)' }}
       >
         <ExternalLink size={12} /> View Full Sample Paper (PDF)
+      </a>
+    </div>
+  )
+}
+
+// ── Starter Code preview card ──
+function StarterCodePreview() {
+  return (
+    <div className="rounded-2xl border border-[#d2d2d7] bg-white p-5 shadow-sm">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
+          <Star size={18} className="text-amber-600" />
+        </div>
+        <div>
+          <p className="font-bold text-sm text-[#1d1d1f]">Sample Starter Code</p>
+          <p className="text-[11px] text-[#86868b]">Ready-to-run Colab notebook</p>
+        </div>
+      </div>
+      {/* Code preview snippet */}
+      <div className="p-3 rounded-xl bg-[#1e1e2e] mb-4 overflow-hidden">
+        <div className="flex items-center gap-1.5 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+          <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+          <span className="text-[10px] text-gray-500 ml-2 font-mono">starter_notebook.ipynb</span>
+        </div>
+        <pre className="text-[10px] leading-relaxed font-mono overflow-x-auto">
+          <code>
+            <span className="text-purple-400">import</span><span className="text-gray-300"> torch</span>{'\n'}
+            <span className="text-purple-400">from</span><span className="text-gray-300"> transformers </span><span className="text-purple-400">import</span><span className="text-gray-300"> AutoModelForCausalLM</span>{'\n'}
+            <span className="text-purple-400">from</span><span className="text-gray-300"> datasets </span><span className="text-purple-400">import</span><span className="text-gray-300"> load_dataset</span>{'\n'}
+            {'\n'}
+            <span className="text-gray-500"># Load model & tokenizer</span>{'\n'}
+            <span className="text-gray-300">model = AutoModelForCausalLM.from_pretrained(</span>{'\n'}
+            <span className="text-green-400">    &quot;model_name&quot;</span><span className="text-gray-300">, torch_dtype=torch.float16</span>{'\n'}
+            <span className="text-gray-300">)</span>{'\n'}
+            {'\n'}
+            <span className="text-gray-500"># Training loop, eval pipeline,</span>{'\n'}
+            <span className="text-gray-500"># experiment config — all included</span>
+          </code>
+        </pre>
+      </div>
+      <p className="text-xs text-[#6e6e73] leading-relaxed mb-4">
+        A complete, documented Colab notebook with data loading, model setup, training loop, evaluation pipeline, and experiment configuration — ready to run on day one.
+      </p>
+      <a
+        href={SAMPLE_COLAB_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center"
+      >
+        <img src={COLAB_BADGE} alt="Open In Colab" className="h-8 hover:opacity-80 transition-opacity" />
       </a>
     </div>
   )
@@ -189,15 +243,16 @@ function ResearchKitSection() {
           className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-2xl border-2 border-pink-200 text-pink-600 hover:border-pink-400 hover:bg-pink-50 transition-all"
         >
           <ChevronDown size={16} className={`transition-transform ${showSamples ? 'rotate-180' : ''}`} />
-          {showSamples ? 'Hide' : 'View'} sample roadmap &amp; paper
+          {showSamples ? 'Hide' : 'View'} sample roadmap, paper &amp; code
         </button>
       </div>
 
       {/* Sample previews */}
       {showSamples && (
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           <RoadmapPreview />
           <PaperPreview />
+          <StarterCodePreview />
         </div>
       )}
     </div>
