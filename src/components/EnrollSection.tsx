@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, ChevronDown, ChevronRight, X, Briefcase, Star } from 'lucide-react'
+import { Check, ChevronDown, ChevronRight, Star } from 'lucide-react'
 import { useCart, CART_ITEMS, formatPrice, CartItemId } from '@/contexts/CartContext'
 import { CompanyLogo } from './CompanyLogos'
 
@@ -12,12 +12,12 @@ function SpeakersDetail() {
     { name: 'Aditya Shrivastava', co: 'Anthropic', col: '#C2461E', topic: 'LLM Inference at Anthropic', career: true },
     { name: 'Shreyans Dhankhar', co: 'NVIDIA', col: '#76B900', topic: 'Disaggregated Inference', career: true },
     { name: 'Harshul Jain', co: 'Audible (Amazon)', col: '#FF9900', topic: 'Framework-Agnostic LLM Serving' },
-    { name: 'Suman Debnath', co: 'AnyScale', col: '#FF6B35', topic: 'Distributed Training with Ray' },
-    { name: 'Seiji Eicher', co: 'AnyScale', col: '#FF6B35', topic: 'Inference at Scale: Ray Serve + vLLM' },
-    { name: 'Aayush Saini', co: 'Red Hat AI', col: '#EE0000', topic: 'Next-Gen Multimodal with Omni-VLLM' },
+    { name: 'Suman Debnath', co: 'AnyScale', col: '#FF6B35', topic: 'Distributed Training with Ray', confirmed: true },
+    { name: 'Seiji Eicher', co: 'AnyScale', col: '#FF6B35', topic: 'Inference at Scale: Ray Serve + vLLM', confirmed: true },
+    { name: 'Aayush Saini', co: 'Red Hat AI', col: '#EE0000', topic: 'Next-Gen Multimodal with Omni-VLLM', confirmed: true },
     { name: 'Suyash Harlalka', co: 'Microsoft', col: '#00A4EF', topic: 'Efficient Inference with SLMs', career: true },
     { name: 'Shubham Panchal', co: 'Mastercard', col: '#EB001B', topic: 'On-Device Android Deployment', confirmed: true },
-    { name: 'Yash Dixit', co: 'Apple', col: '#555555', topic: 'How Inference Is Done on LLMs at Apple', career: true },
+    { name: 'Yash Dixit', co: 'Apple', col: '#555555', topic: 'How Inference Is Done on LLMs at Apple', career: true, confirmed: true },
   ]
   return (
     <div className="mt-4 space-y-2">
@@ -46,25 +46,6 @@ function SpeakersDetail() {
   )
 }
 
-function HardwareDetail() {
-  return (
-    <div className="mt-4 space-y-2">
-      {[
-        { device: 'Mac Mini', day: 'Lab Day 1 · Apr 25', tasks: 'llama.cpp setup, first inference, tok/s benchmarks' },
-        { device: 'Raspberry Pi 5', day: 'Lab Day 2 · May 2', tasks: 'ARM inference, INT4 vs INT8 quantization, latency comparison' },
-        { device: 'Android (Shubham Panchal)', day: 'Lab Day 3 · May 9 — CONFIRMED', tasks: '3-hour mobile workshop, SmolChat-Android, ONNX runtime' },
-        { device: 'Jetson Orin Nano', day: 'Lab Day 4 · May 16', tasks: 'CUDA inference, TensorRT-LLM, GPU vs CPU throughput' },
-      ].map(l => (
-        <div key={l.device} className="p-2.5 rounded-xl bg-[#f5f5f7]">
-          <p className="text-sm font-semibold text-[#1d1d1f]">{l.device}</p>
-          <p className="text-xs text-[#86868b]">{l.day}</p>
-          <p className="text-xs text-[#6e6e73] mt-0.5">{l.tasks}</p>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 function MentorDetail() {
   return (
     <div className="mt-4 p-4 rounded-xl bg-[#f5f5f7]">
@@ -89,10 +70,10 @@ function MentorDetail() {
 }
 
 // ── Phase card (base selection) ──
-const phase1Lectures = ['L1: The Inference Stack','L2: Transformer Deep Dive','L3: Prefill, Decode & KV Cache','L4: GPU Architecture & Roofline','L5: Quantization','L6: Speculative Decoding','L7: FlashAttention & Kernel Fusion','L8: Inference Engines & Serving']
-const phase2Lectures = ['L9: MoE & Model Parallelism','L10: Edge Deployment','L11: Voice Pipeline','L12: Multimodal Inference','L13: Production Systems','L14: Structured Output & Evals','L15: Fine-Tuning & Distillation for Edge']
+const phase1Lectures = ['L1: The Inference Stack','L2: Transformer Deep Dive','L3: Prefill, Decode & KV Cache','L4: GPU Architecture & Roofline','L5: Quantization','L6: Speculative Decoding','L7: FlashAttention, Kernel Fusion & Inference Engines']
+const phase2Lectures = ['L8: MoE & Model Parallelism','L9: Edge Deployment','L10: Voice Pipeline','L11: Multimodal Inference','L12: Production Systems','L13: Structured Output & Evals','L14: Fine-Tuning & Distillation for Edge']
 
-function PhaseCard({ id, title, dates, price, lectures, accent }: { id: CartItemId; title: string; dates: string; price: number; lectures: string[]; accent: string }) {
+function PhaseCard({ id, title, dates, price, lectures, accent, extras }: { id: CartItemId; title: string; dates: string; price: number; lectures: string[]; accent: string; extras?: string[] }) {
   const { toggle, has } = useCart()
   const [exp, setExp] = useState(false)
   const sel = has(id)
@@ -107,6 +88,18 @@ function PhaseCard({ id, title, dates, price, lectures, accent }: { id: CartItem
       <h3 className="text-lg font-bold mt-1 mb-0.5" style={{ letterSpacing: '-0.02em' }}>{title.split('—')[1]?.trim() || title}</h3>
       <p className="text-xs text-[#86868b] mb-3">{dates}</p>
       <p className="text-2xl font-bold mb-3" style={{ letterSpacing: '-0.03em' }}>{formatPrice(price)}</p>
+
+      {/* Included items */}
+      {extras && (
+        <div className="mb-3 space-y-1">
+          {extras.map(e => (
+            <div key={e} className="flex items-center gap-1.5 text-xs text-[#4a4a4a]">
+              <Check size={11} className="text-green-500 flex-shrink-0"/>{e}
+            </div>
+          ))}
+        </div>
+      )}
+
       <button
         onClick={e => { e.stopPropagation(); setExp(!exp) }}
         className="flex items-center gap-1 text-xs font-medium text-pink-500 hover:text-pink-700 transition-colors"
@@ -172,7 +165,7 @@ function AddOnRow({ id, label, price, sub, detail }: AddOnProps) {
 }
 
 export default function EnrollSection() {
-  const { items, total, enrollUrl } = useCart()
+  const { items, total, discount, enrollUrl } = useCart()
   const hasBase = items.has('phase1') || items.has('phase2')
 
   return (
@@ -196,22 +189,24 @@ export default function EnrollSection() {
                 <PhaseCard
                   id="phase1"
                   title="Phase 1 — Foundations & Optimization"
-                  dates="Apr 20 – May 3, 2026 · 8 lectures"
+                  dates="Apr 27 – May 10, 2026 · 7 lectures"
                   price={45000}
                   lectures={phase1Lectures}
                   accent="#E91E8C"
+                  extras={['Hardware lab sessions included', 'Colab labs & visual guides', 'Live Zoom + recordings', 'Lifetime access']}
                 />
                 <PhaseCard
                   id="phase2"
                   title="Phase 2 — Production & Edge Deployment"
-                  dates="May 4 – May 18, 2026 · 7 lectures"
+                  dates="May 11 – May 25, 2026 · 7 lectures"
                   price={55000}
                   lectures={phase2Lectures}
                   accent="#7C3AED"
+                  extras={['Hardware lab sessions included', 'Colab labs & visual guides', 'Live Zoom + recordings', 'Lifetime access']}
                 />
               </div>
               <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7] text-xs text-[#6e6e73] text-center">
-                Take both phases and pay just {formatPrice(100000)} combined.
+                Take both phases and save {formatPrice(20000)} — pay just {formatPrice(80000)} combined (20% off).
               </div>
             </div>
 
@@ -227,13 +222,6 @@ export default function EnrollSection() {
                   detail={<SpeakersDetail/>}
                 />
                 <AddOnRow
-                  id="hardware"
-                  label="Hardware Lab Sessions"
-                  price={30000}
-                  sub="4 guided lab days — Mac Mini, Raspberry Pi 5, Android, Jetson Orin Nano. Hardware must be purchased separately; this pass covers lab access and instruction."
-                  detail={<HardwareDetail/>}
-                />
-                <AddOnRow
                   id="research"
                   label="Research Roadmap + Code Starter"
                   price={15000}
@@ -246,6 +234,24 @@ export default function EnrollSection() {
                   sub="with Yash Dixit, AI/ML Product Manager at Apple · 4 bi-weekly sessions"
                   detail={<MentorDetail/>}
                 />
+              </div>
+            </div>
+
+            {/* Best value banner */}
+            <div data-reveal data-delay="2">
+              <div className="p-4 rounded-2xl border-2 border-pink-200 bg-gradient-to-r from-pink-50 to-purple-50">
+                <div className="flex items-center gap-2 mb-2">
+                  <Star size={14} className="text-pink-500"/>
+                  <p className="text-sm font-bold text-[#1d1d1f]">Best Value — The Entire Bundle</p>
+                </div>
+                <p className="text-xs text-[#6e6e73] mb-2">
+                  Phase 1 + Phase 2 + Guest Speaker Pass + Research Roadmap + Mentorship
+                </p>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-xs text-[#86868b] line-through">{formatPrice(215000)}</span>
+                  <span className="text-lg font-bold text-pink-600">{formatPrice(172000)}</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-600">SAVE 20%</span>
+                </div>
               </div>
             </div>
           </div>
@@ -271,6 +277,13 @@ export default function EnrollSection() {
               )}
 
               {items.size > 0 && <div className="divider mb-4"/>}
+
+              {discount > 0 && (
+                <div className="flex justify-between items-baseline mb-2">
+                  <span className="text-sm text-green-600 font-medium">Discount (20% off)</span>
+                  <span className="text-sm font-bold text-green-600">-{formatPrice(discount)}</span>
+                </div>
+              )}
 
               <div className="flex justify-between items-baseline mb-5">
                 <span className="text-sm text-[#6e6e73]">Total</span>

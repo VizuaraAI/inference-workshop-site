@@ -42,7 +42,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 bg-white text-[#6e6e73] px-4 py-1.5 rounded-full text-sm font-medium mb-8 border border-[#d2d2d7] shadow-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--ai-pink)' }} />
-          Applications Open · April 20, 2026
+          Applications Open · April 27, 2026
         </div>
 
         {/* Headline */}
@@ -62,14 +62,14 @@ export default function Hero() {
         >
           A 4-week intensive from transformer internals and KV cache
           to production deployment on edge devices. Taught by Dr. Raj Dandekar (MIT PhD)
-          with 8 industry experts from the world's top AI companies.
+          with 9 industry experts from the world's top AI companies.
         </p>
 
         {/* Company strip — inline under subtitle */}
-        <div data-reveal data-delay="2" className="flex items-center justify-center gap-3 flex-wrap mb-8">
+        <div data-reveal data-delay="2" className="flex items-center justify-center gap-5 flex-wrap mb-8">
           {companies.map(c => (
             <div key={c} className="flex items-center">
-              <CompanyLogo company={c} height={16} />
+              <CompanyLogo company={c} height={28} />
             </div>
           ))}
         </div>
@@ -91,9 +91,9 @@ export default function Hero() {
         >
           {[
             { n: '200+', label: 'Engineers' },
-            { n: '15', label: 'Core Lectures' },
-            { n: '8', label: 'Guest Lecturers' },
-            { n: '4', label: 'Hardware Devices' },
+            { n: '14', label: 'Core Lectures' },
+            { n: '9', label: 'Guest Lecturers' },
+            { n: '3', label: 'Hardware Devices' },
           ].map(s => (
             <div key={s.label} className="bg-white border border-[#e8e8ed] rounded-2xl py-4 px-3 shadow-sm">
               <div className="text-3xl font-bold mb-0.5 text-gradient" style={{ letterSpacing: '-0.03em' }}>{s.n}</div>

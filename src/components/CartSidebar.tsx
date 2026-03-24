@@ -4,7 +4,7 @@ import { X, ShoppingCart, Trash2, ChevronRight } from 'lucide-react'
 import { useCart, CART_ITEMS, formatPrice } from '@/contexts/CartContext'
 
 export default function CartSidebar() {
-  const { items, toggle, total, isOpen, setIsOpen, enrollUrl } = useCart()
+  const { items, toggle, total, discount, isOpen, setIsOpen, enrollUrl } = useCart()
 
   const hasBase = items.has('phase1') || items.has('phase2')
 
@@ -76,6 +76,12 @@ export default function CartSidebar() {
         {/* Footer total + CTA */}
         {items.size > 0 && (
           <div className="px-6 py-5 border-t border-gray-100 space-y-4">
+            {discount > 0 && (
+              <div className="flex items-center justify-between text-green-600">
+                <span className="text-sm font-medium">Discount (20% off)</span>
+                <span className="text-sm font-bold">-{formatPrice(discount)}</span>
+              </div>
+            )}
             <div className="flex items-center justify-between">
               <span className="text-gray-600 font-medium">Total</span>
               <span className="text-2xl font-black text-gray-900">{formatPrice(total)}</span>

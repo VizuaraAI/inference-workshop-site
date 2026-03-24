@@ -13,7 +13,7 @@ const faqGroups = [
       },
       {
         q: 'Can I take just Phase 1 or just Phase 2?',
-        a: 'Yes. Each phase is designed to be self-contained. Phase 1 covers foundations and optimization (quantization, speculative decoding, FlashAttention, serving engines). Phase 2 covers production and edge deployment. Taking both gives you the full picture.',
+        a: 'Yes. Each phase is designed to be self-contained. Phase 1 covers foundations and optimization (quantization, speculative decoding, FlashAttention, serving engines). Phase 2 covers production and edge deployment. Taking both gives you the full picture and saves you 20%.',
       },
       {
         q: 'Are sessions live or recorded?',
@@ -33,28 +33,24 @@ const faqGroups = [
     group: 'Hardware',
     faqs: [
       {
-        q: 'What hardware do I need to purchase?',
-        a: 'For the Hardware Lab Sessions add-on you will need: (1) Raspberry Pi 5 (4GB or 8GB) for Lab Day 2, (2) NVIDIA Jetson Orin Nano 8GB Developer Kit for Lab Day 4, and (3) Any Android 10+ phone with 6GB+ RAM for Lab Day 3. A Mac Mini is used in Lab Day 1 but is optional — you can run the same exercises on your own laptop or PC.',
+        q: 'What hardware do I need?',
+        a: 'Hardware labs are included in Phase 1 and Phase 2 at no extra cost. You will need: (1) Your own laptop or PC (any OS) for Lab Day 1, (2) Raspberry Pi 4 Model B for Lab Day 2, and (3) Any Android 10+ phone with 6GB+ RAM for Lab Day 3. The Jetson Orin Nano demo is to be decided — if confirmed, Dr. Raj will demo it live so you do not need to purchase one.',
       },
       {
-        q: 'Can I order all the hardware together to save on shipping and customs?',
-        a: 'Yes — and we strongly recommend it. Purchase your Raspberry Pi 5 and Jetson Orin Nano in a single order to avoid separate delivery and customs fees. You can buy both from Robu.in (India) or their respective official stores. Order at least 2 weeks before Lab Day 1 (Apr 25) to ensure delivery.',
+        q: 'Do I need to buy a Jetson Orin Nano?',
+        a: 'No. The Jetson Orin Nano is optional and a bit expensive. If the demo session is confirmed, Dr. Raj will run it live so you can follow along without owning the hardware. If you want to purchase one for your own experiments, you can find it on Amazon.',
       },
       {
-        q: 'Which Jetson model should I buy? There are many options.',
-        a: 'We recommend the Jetson Orin Nano 8GB Developer Kit — it is the cheapest Jetson model that can comfortably run LLM projects and is what the lab is designed for. Avoid the 4GB Jetson Nano (older generation) as it has limited RAM for modern LLMs. The Jetson AGX Orin and Jetson Orin NX are more powerful but significantly more expensive and not necessary for this workshop.',
-      },
-      {
-        q: 'Do I need a Mac Mini? I only have a Windows PC.',
-        a: 'No, a Mac Mini is not required. Lab Day 1 is designed around Apple Silicon (llama.cpp on Mac Mini) but all the exercises — benchmarking, first inference, model loading — can be run on any laptop or PC. We will provide equivalent instructions for Windows and Linux. If you do want to buy a Mac Mini, the M4 base model is sufficient.',
+        q: 'Which Raspberry Pi model should I buy?',
+        a: 'We use the Raspberry Pi 4 Model B. It features a 1.5GHz Quad-core Cortex-A72 (BCM2711), up to 8GB LPDDR4 RAM, dual-band Wi-Fi, Bluetooth 5.0, Gigabit Ethernet, and 2x USB 3.0 ports. You can buy it on Amazon.in.',
       },
       {
         q: 'Is hardware included in the workshop fee?',
-        a: 'No. The Hardware Lab Sessions add-on (₹30,000) covers instruction, lab guides, and live sessions — not the physical hardware itself. You purchase and own your own devices. This also means you keep them after the workshop for continued experimentation.',
+        a: 'Hardware lab sessions (instruction, lab guides, and live sessions) are included in Phase 1 and Phase 2 — there is no separate fee for lab access. However, you do need to purchase the physical hardware devices yourself. You keep them after the workshop for continued experimentation.',
       },
       {
         q: 'When should I order the hardware?',
-        a: 'Order as soon as you enroll. Lab Day 1 starts Apr 25. Depending on your location, Jetson hardware in particular can take 1–2 weeks to arrive. We recommend ordering everything at least 2–3 weeks before the lab start date.',
+        a: 'Order as soon as you enroll. Lab Day 1 starts the first weekend of your phase. Depending on your location, hardware can take 1–2 weeks to arrive. We recommend ordering at least 2–3 weeks before the workshop start date (Apr 27).',
       },
     ],
   },
@@ -75,7 +71,7 @@ const faqGroups = [
       },
       {
         q: 'What are the guest speaker session dates?',
-        a: 'Guest sessions are scheduled throughout Apr 24 – May 15. All dates are target dates pending speaker confirmation and may shift. You will be notified as soon as each date is confirmed. All sessions are recorded if you cannot attend live.',
+        a: 'Guest sessions are scheduled throughout May 2026. Some speakers are confirmed; others are pending confirmation. You will be notified as soon as each date is finalized. All sessions are recorded if you cannot attend live.',
       },
       {
         q: 'Are guest speaker sessions included in the base phase fee?',

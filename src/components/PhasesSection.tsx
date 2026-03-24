@@ -10,18 +10,17 @@ const phase1 = [
   { code: 'L4', title: 'GPU Architecture & Roofline', desc: 'SMs, tensor cores, compute vs. memory bound' },
   { code: 'L5', title: 'Quantization', desc: 'FP16, BF16, INT8, INT4, GPTQ, AWQ, GGUF format' },
   { code: 'L6', title: 'Speculative Decoding', desc: 'Draft-target, n-gram, EAGLE, Medusa, acceptance sampling' },
-  { code: 'L7', title: 'FlashAttention & Kernel Fusion', desc: 'IO-aware tiling, online softmax, fused kernels' },
-  { code: 'L8', title: 'Inference Engines & Serving', desc: 'vLLM, TensorRT-LLM, SGLang, continuous batching, PagedAttention' },
+  { code: 'L7', title: 'FlashAttention, Kernel Fusion & Inference Engines', desc: 'IO-aware tiling, online softmax, fused kernels, vLLM, TensorRT-LLM, SGLang, continuous batching, PagedAttention' },
 ]
 
 const phase2 = [
-  { code: 'L9',  title: 'MoE & Model Parallelism', desc: 'Mixture of experts, tensor/pipeline/expert parallelism' },
-  { code: 'L10', title: 'Edge Deployment', desc: 'llama.cpp on ARM, MLX on Apple Silicon, GGUF optimization' },
-  { code: 'L11', title: 'Voice Pipeline', desc: 'ASR (Whisper) → LLM → TTS (Piper), end-to-end on edge' },
-  { code: 'L12', title: 'Multimodal Inference', desc: 'Vision-language models, image generation, video generation' },
-  { code: 'L13', title: 'Production Systems', desc: 'Cold starts, canary deployments, multi-cloud, cache-aware routing' },
-  { code: 'L14', title: 'Structured Output & Evals', desc: 'JSON schema, logit biasing, guided decoding, eval harnesses' },
-  { code: 'L15', title: 'Fine-Tuning & Distillation for Edge', desc: 'LoRA, QLoRA, knowledge distillation, model-to-edge pipeline' },
+  { code: 'L8',  title: 'MoE & Model Parallelism', desc: 'Mixture of experts, tensor/pipeline/expert parallelism' },
+  { code: 'L9',  title: 'Edge Deployment', desc: 'llama.cpp on ARM, MLX on Apple Silicon, GGUF optimization' },
+  { code: 'L10', title: 'Voice Pipeline', desc: 'ASR (Whisper) → LLM → TTS (Piper), end-to-end on edge' },
+  { code: 'L11', title: 'Multimodal Inference', desc: 'Vision-language models, image generation, video generation' },
+  { code: 'L12', title: 'Production Systems', desc: 'Cold starts, canary deployments, multi-cloud, cache-aware routing' },
+  { code: 'L13', title: 'Structured Output & Evals', desc: 'JSON schema, logit biasing, guided decoding, eval harnesses' },
+  { code: 'L14', title: 'Fine-Tuning & Distillation for Edge', desc: 'LoRA, QLoRA, knowledge distillation, model-to-edge pipeline' },
 ]
 
 function LectureList({ lectures, accent }: { lectures: typeof phase1; accent: string }) {
@@ -48,6 +47,7 @@ function PhaseBlock({ title, dates, lectures, accent }: { title: string; dates: 
       <p className="text-xs text-[#86868b] mt-0.5 mb-4">{dates}</p>
       {[
         `${lectures.length} core lectures`,
+        'Hardware lab sessions included',
         'Daily Colab labs & visual guides',
         'Live Zoom sessions + recordings',
         'Lifetime access',
@@ -76,15 +76,15 @@ export default function PhasesSection() {
             <span className="text-gradient">One complete education.</span>
           </h2>
           <p className="subhead max-w-xl mx-auto">
-            15 lectures across 4 weeks. Each phase is self-contained — take one or both.
+            14 lectures across 4 weeks. Each phase is self-contained — take one or both.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-6">
           <div data-reveal data-delay="1">
-            <PhaseBlock title="Phase 1 — Foundations & Optimization" dates="Apr 20 – May 3, 2026" lectures={phase1} accent="#E91E8C"/>
+            <PhaseBlock title="Phase 1 — Foundations & Optimization" dates="Apr 27 – May 10, 2026" lectures={phase1} accent="#E91E8C"/>
           </div>
           <div data-reveal data-delay="2">
-            <PhaseBlock title="Phase 2 — Production & Edge Deployment" dates="May 4 – May 18, 2026" lectures={phase2} accent="#7C3AED"/>
+            <PhaseBlock title="Phase 2 — Production & Edge Deployment" dates="May 11 – May 25, 2026" lectures={phase2} accent="#7C3AED"/>
           </div>
         </div>
       </div>

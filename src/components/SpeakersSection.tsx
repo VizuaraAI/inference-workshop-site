@@ -20,7 +20,7 @@ const speakers: Speaker[] = [
     avatarGrad: 'linear-gradient(135deg,#E36C2F,#C94F1A)',
     photo: 'https://media.licdn.com/dms/image/v2/D4E03AQHpUJWnSZdYVg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1715812464919?e=1775692800&v=beta&t=CLkWqGxeKP3aeCMduUU3LPUIu8Wb42Bisc1SrS24UvM',
     confirmed: false,
-    date: 'Fri Apr 24 (target — pending Anthropic approval)',
+    date: 'TBD (target — pending Anthropic approval)',
   },
   {
     name: 'Shreyans Dhankhar', role: 'Senior Solutions Architect, LLM Systems', company: 'NVIDIA', companyColor: '#76B900',
@@ -47,8 +47,8 @@ const speakers: Speaker[] = [
     description: 'Getting started with distributed computing and training using Ray — Ray Train + Ray Data, post-training pipeline design, and how leading AI companies run training at scale.',
     avatarGrad: 'linear-gradient(135deg,#FF6B35,#E85520)',
     photo: 'https://media.licdn.com/dms/image/v2/C5603AQEiUcyQuVycPA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1626459392800?e=1775692800&v=beta&t=laJbjbbstWSYWTQ3Il1OQTDAjnB8lXj07U9Aa6Qws2I',
-    confirmed: false,
-    date: 'Thu May 7 (target — pending OOO resolution)',
+    confirmed: true,
+    date: 'Thu May 7 — CONFIRMED',
   },
   {
     name: 'Seiji Eicher', role: 'Engineer, vLLM & Ray Serve Team', company: 'AnyScale', companyColor: '#FF6B35',
@@ -56,8 +56,8 @@ const speakers: Speaker[] = [
     description: 'Production inference architecture with Ray Serve and vLLM — how to build, scale, and maintain high-throughput serving infrastructure. Real-world case studies from AnyScale customers.',
     avatarGrad: 'linear-gradient(135deg,#7C3AED,#5B21B6)',
     photo: 'https://media.licdn.com/dms/image/v2/D5603AQEMzAiRUubgQA/profile-displayphoto-shrink_400_400/B56ZREkG_ZHQAk-/0/1736317104347?e=1775692800&v=beta&t=Uzt492h3YcoH06zqL_nv2gk1pzSjCtRAAi6j8YsNHz4',
-    confirmed: false,
-    date: 'Fri May 8 (target — Seiji OOO parts of May)',
+    confirmed: true,
+    date: 'Fri May 8 — CONFIRMED',
   },
   {
     name: 'Aayush Saini', role: 'SDE 2, Data and AI', company: 'Red Hat AI', companyColor: '#EE0000',
@@ -65,8 +65,8 @@ const speakers: Speaker[] = [
     description: 'Deep dive into Omni-VLLM architecture — streaming multimodal processing across text, image, audio, and video. Comparison with separate modality servers. Contribution roadmap.',
     avatarGrad: 'linear-gradient(135deg,#EE0000,#BB0000)',
     photo: 'https://media.licdn.com/dms/image/v2/D5603AQHKg7FMDWTsTQ/profile-displayphoto-crop_800_800/B56ZqNbg4FI0AI-/0/1763309396491?e=1775692800&v=beta&t=e9pCSPyZSulRrIjkNpkxEIWCMve6gL4Edk-AvXVGf2Y',
-    confirmed: false,
-    date: 'Tue May 12 (target — May 2nd week)',
+    confirmed: true,
+    date: 'Tue May 12 — CONFIRMED',
   },
   {
     name: 'Suyash Harlalka', role: 'Principal Data Scientist', company: 'Microsoft', companyColor: '#00A4EF',
@@ -94,8 +94,8 @@ const speakers: Speaker[] = [
     careerInsight: 'Inside view of ML product and engineering roles at Apple — what the organisation looks like, what Apple AI PM and engineering roles entail, and how to position yourself for an Apple AI role.',
     avatarGrad: 'linear-gradient(135deg,#888,#444)',
     photo: 'https://media.licdn.com/dms/image/v2/D4E03AQHH3cCdo2E1iA/profile-displayphoto-crop_800_800/B4EZxtNDaDIYAI-/0/1771358665567?e=1775692800&v=beta&t=LgXWJZWfnvudWPiKJk5uuRBSRTPQRybXgN4_EqxtubE',
-    confirmed: false,
-    date: 'TBD (target — May/June)',
+    confirmed: true,
+    date: 'TBD — CONFIRMED',
   },
 ]
 

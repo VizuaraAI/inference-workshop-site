@@ -6,7 +6,6 @@ export type CartItemId =
   | 'phase1'
   | 'phase2'
   | 'speakers'
-  | 'hardware'
   | 'research'
   | 'mentorship'
 
@@ -22,25 +21,19 @@ export const CART_ITEMS: Record<CartItemId, CartItem> = {
     id: 'phase1',
     name: 'Phase 1 — Foundations & Optimization',
     price: 45000,
-    description: 'Apr 20 – May 3 · 8 core lectures + 2 hardware labs',
+    description: 'Apr 27 – May 10 · 7 core lectures + hardware labs included',
   },
   phase2: {
     id: 'phase2',
     name: 'Phase 2 — Production & Edge Deployment',
     price: 55000,
-    description: 'May 4 – May 18 · 7 core lectures + 2 hardware labs',
+    description: 'May 11 – May 25 · 7 core lectures + hardware labs included',
   },
   speakers: {
     id: 'speakers',
     name: 'Guest Speaker Pass',
     price: 30000,
-    description: '8 industry experts from Anthropic, NVIDIA, Microsoft & more',
-  },
-  hardware: {
-    id: 'hardware',
-    name: 'Hardware Lab Access',
-    price: 30000,
-    description: '4 hands-on lab days: Mac Mini, Pi 5, Jetson, Android',
+    description: '9 industry experts from Anthropic, NVIDIA, Microsoft & more',
   },
   research: {
     id: 'research',
@@ -61,39 +54,41 @@ interface CartContextType {
   toggle: (id: CartItemId) => void
   has: (id: CartItemId) => boolean
   total: number
+  discount: number
   isOpen: boolean
   setIsOpen: (v: boolean) => void
   enrollUrl: string
 }
 
-const COURSE_BASE = 'https://vizuara.ai/courses'
 const BUNDLE_BASE = 'https://vizuara.ai/course-bundle'
+const COURSE_BASE = 'https://vizuara.ai/courses'
 
 const ENROLL_URL_MAP: Record<string, string> = {
   // Single items
   'phase1':                            `${COURSE_BASE}/course_20006357`,
   'phase2':                            `${COURSE_BASE}/course_20006404`,
-  'phase1,phase2':                     `${COURSE_BASE}/course_20006441`,
   'speakers':                          `${COURSE_BASE}/course_20006463`,
-  'hardware':                          `${COURSE_BASE}/course_20006483`,
   'research':                          `${COURSE_BASE}/course_20006533`,
   'mentorship':                        `${COURSE_BASE}/course_20006579`,
 
-  // 2-item bundles
-  'phase1,speakers':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-guest-speaker-pass`,
-  'hardware,phase1':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-hardware-labs`,
-  'phase2,speakers':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-2-guest-speaker-pass`,
-  'hardware,phase2':                   `${BUNDLE_BASE}/inference-engineering-workshop-phase-2-hardware-labs`,
-  'mentorship,phase1':                 `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-1-1-research-mentorship-2-months-yash-dixit`,
+  // Phase 1 + Phase 2 (20% discount)
+  'phase1,phase2':                     `${COURSE_BASE}/course_20006441`,
+
+  // 2-item bundles (no discount, just sum)
+  'phase1,speakers':                   `${BUNDLE_BASE}/bundle_10003445`,
+  'phase2,speakers':                   `${BUNDLE_BASE}/bundle_10003580`,
+  'phase1,research':                   `${BUNDLE_BASE}/bundle_10004188`,
+  'phase2,research':                   `${BUNDLE_BASE}/bundle_10004268`,
+  'mentorship,phase2':                 `${BUNDLE_BASE}/bundle_10004102`,
+  'mentorship,phase1':                 `${BUNDLE_BASE}/bundle_10004000`,
 
   // 3-item bundles
-  'phase1,phase2,speakers':            `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-guest-speaker-pass`,
-  'hardware,phase1,phase2':            `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-hardware-labs`,
-  'phase1,phase2,research':            `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-research-roadmap-code-starter`,
-  'mentorship,phase1,phase2':          `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-1-1-research-mentorship-2-months-yash-dixit`,
+  'phase1,phase2,speakers':            `${BUNDLE_BASE}/bundle_10003710`,
+  'phase1,phase2,research':            `${BUNDLE_BASE}/bundle_10003900`,
+  'mentorship,phase1,phase2':          `${BUNDLE_BASE}/bundle_10004000`,
 
-  // 4-item bundles
-  'hardware,phase1,phase2,speakers':   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-guest-speaker-pass-hardware-labs`,
+  // The entire bundle (20% discount)
+  'mentorship,phase1,phase2,research,speakers': `${BUNDLE_BASE}/bundle_10004342`,
 }
 
 function getEnrollUrl(items: Set<CartItemId>): string {
@@ -104,6 +99,19 @@ function getEnrollUrl(items: Set<CartItemId>): string {
   if (items.has('phase1')) return `${COURSE_BASE}/course_20006357`
   if (items.has('phase2')) return `${COURSE_BASE}/course_20006404`
   return '#enroll'
+}
+
+function getDiscount(items: Set<CartItemId>): number {
+  const all: CartItemId[] = ['phase1', 'phase2', 'speakers', 'research', 'mentorship']
+  const hasAll = all.every(id => items.has(id))
+
+  // Entire bundle: original 215,000 → 172,000 (save 43,000)
+  if (hasAll) return 43000
+
+  // Phase 1 + Phase 2 only (no other add-ons): 100,000 → 80,000 (save 20,000)
+  if (items.has('phase1') && items.has('phase2') && items.size === 2) return 20000
+
+  return 0
 }
 
 const CartContext = createContext<CartContextType | null>(null)
@@ -127,13 +135,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const has = useCallback((id: CartItemId) => items.has(id), [items])
 
-  const total = Array.from(items).reduce((sum, id) => sum + CART_ITEMS[id].price, 0)
+  const subtotal = Array.from(items).reduce((sum, id) => sum + CART_ITEMS[id].price, 0)
+  const discount = getDiscount(items)
+  const total = subtotal - discount
 
   // Generate enrollment URL based on cart contents
   const enrollUrl = getEnrollUrl(items)
 
   return (
-    <CartContext.Provider value={{ items, toggle, has, total, isOpen, setIsOpen, enrollUrl }}>
+    <CartContext.Provider value={{ items, toggle, has, total, discount, isOpen, setIsOpen, enrollUrl }}>
       {children}
     </CartContext.Provider>
   )

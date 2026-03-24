@@ -12,8 +12,8 @@ const audience = [
 const outcomes = [
   'Answer end-to-end inference system design questions in any ML interview',
   'Explain low-latency, high-throughput, cost-optimised LLM serving at scale',
-  'Deploy real LLMs on Mac Mini, Raspberry Pi 5, Android & Jetson Orin Nano',
-  'Build industry-level portfolio projects from 4 hardware lab days',
+  'Deploy real LLMs on your own laptop, Raspberry Pi 4, Android & Jetson Orin Nano',
+  'Build industry-level portfolio projects from hands-on hardware lab days',
   'Get career insights directly from engineers at Anthropic, NVIDIA & Microsoft',
 ]
 
