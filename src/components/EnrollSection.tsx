@@ -165,7 +165,7 @@ function AddOnRow({ id, label, price, sub, detail }: AddOnProps) {
 }
 
 export default function EnrollSection() {
-  const { items, total, discount, selectAll, enrollUrl } = useCart()
+  const { items, total, discount, discountPct, selectAll, enrollUrl } = useCart()
   const hasBase = items.has('phase1') || items.has('phase2')
 
   return (
@@ -253,7 +253,7 @@ export default function EnrollSection() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-xs text-[#86868b] line-through">{formatPrice(195000)}</span>
                   <span className="text-lg font-bold text-pink-600">{formatPrice(156000)}</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-600">SAVE 20%</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-600">SAVE 27%</span>
                   <span className="text-[11px] font-semibold text-pink-500 ml-auto">Click to select all →</span>
                 </div>
               </button>
@@ -284,7 +284,7 @@ export default function EnrollSection() {
 
               {discount > 0 && (
                 <div className="flex justify-between items-baseline mb-2">
-                  <span className="text-sm text-green-600 font-medium">Discount (20% off)</span>
+                  <span className="text-sm text-green-600 font-medium">Discount ({discountPct}% off)</span>
                   <span className="text-sm font-bold text-green-600">-{formatPrice(discount)}</span>
                 </div>
               )}

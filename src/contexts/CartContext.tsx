@@ -56,6 +56,7 @@ interface CartContextType {
   selectAll: () => void
   total: number
   discount: number
+  discountPct: number
   isOpen: boolean
   setIsOpen: (v: boolean) => void
   enrollUrl: string
@@ -111,7 +112,7 @@ function getDiscount(items: Set<CartItemId>): number {
   const all: CartItemId[] = ['phase1', 'phase2', 'speakers', 'research', 'mentorship']
   const hasAll = all.every(id => items.has(id))
 
-  // Entire bundle: original 195,000 (with phase discount) → 156,000 (20% off = save 39,000)
+  // Entire bundle: raw 215,000 → 156,000 (save 59,000 = ~27% off)
   if (hasAll) return 59000
 
   // Whenever both phases are selected: save 20,000
@@ -149,12 +150,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const subtotal = Array.from(items).reduce((sum, id) => sum + CART_ITEMS[id].price, 0)
   const discount = getDiscount(items)
   const total = subtotal - discount
+  const discountPct = subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0
 
   // Generate enrollment URL based on cart contents
   const enrollUrl = getEnrollUrl(items)
 
   return (
-    <CartContext.Provider value={{ items, toggle, has, selectAll, total, discount, isOpen, setIsOpen, enrollUrl }}>
+    <CartContext.Provider value={{ items, toggle, has, selectAll, total, discount, discountPct, isOpen, setIsOpen, enrollUrl }}>
       {children}
     </CartContext.Provider>
   )
