@@ -53,6 +53,7 @@ interface CartContextType {
   items: Set<CartItemId>
   toggle: (id: CartItemId) => void
   has: (id: CartItemId) => boolean
+  selectAll: () => void
   total: number
   discount: number
   isOpen: boolean
@@ -108,8 +109,8 @@ function getDiscount(items: Set<CartItemId>): number {
   // Entire bundle: original 215,000 → 172,000 (save 43,000)
   if (hasAll) return 43000
 
-  // Phase 1 + Phase 2 only (no other add-ons): 100,000 → 80,000 (save 20,000)
-  if (items.has('phase1') && items.has('phase2') && items.size === 2) return 20000
+  // Whenever both phases are selected: save 20,000
+  if (items.has('phase1') && items.has('phase2')) return 20000
 
   return 0
 }
@@ -135,6 +136,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const has = useCallback((id: CartItemId) => items.has(id), [items])
 
+  const selectAll = useCallback(() => {
+    setItems(new Set<CartItemId>(['phase1', 'phase2', 'speakers', 'research', 'mentorship']))
+    setIsOpen(true)
+  }, [])
+
   const subtotal = Array.from(items).reduce((sum, id) => sum + CART_ITEMS[id].price, 0)
   const discount = getDiscount(items)
   const total = subtotal - discount
@@ -143,7 +149,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const enrollUrl = getEnrollUrl(items)
 
   return (
-    <CartContext.Provider value={{ items, toggle, has, total, discount, isOpen, setIsOpen, enrollUrl }}>
+    <CartContext.Provider value={{ items, toggle, has, selectAll, total, discount, isOpen, setIsOpen, enrollUrl }}>
       {children}
     </CartContext.Provider>
   )

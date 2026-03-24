@@ -87,6 +87,18 @@ export default function PhasesSection() {
             <PhaseBlock title="Phase 2 — Production & Edge Deployment" dates="May 11 – May 25, 2026" lectures={phase2} accent="#7C3AED"/>
           </div>
         </div>
+
+        {/* Hardware labs note */}
+        <div className="mt-8 rounded-2xl border border-[#e8e8ed] bg-[#f9f9fb] p-6 text-center" data-reveal data-delay="3">
+          <h3 className="text-lg font-bold text-[#1d1d1f] mb-2" style={{ letterSpacing: '-0.02em' }}>
+            Hardware Labs <span className="text-gradient">Included</span>
+          </h3>
+          <p className="text-sm text-[#6e6e73] max-w-2xl mx-auto">
+            Both Phase 1 and Phase 2 include hands-on hardware lab sessions at no extra cost.
+            You'll run inference on your own laptop, Raspberry Pi 4, Android device, and see a live Jetson Orin Nano demo —
+            all guided by Dr. Raj Dandekar.
+          </p>
+        </div>
       </div>
     </section>
   )
