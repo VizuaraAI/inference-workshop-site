@@ -65,6 +65,40 @@ function PhaseBlock({ title, dates, lectures, accent }: { title: string; dates: 
   )
 }
 
+function PhaseLabDropdown({ title, accent, labs }: { title: string; accent: string; labs: { device: string; day: string; tasks: string }[] }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="rounded-2xl border border-[#e8e8ed] bg-[#f9f9fb] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white/50 transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: accent }} />
+          <span className="font-bold text-sm text-[#1d1d1f]">{title}</span>
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: accent }}>
+            {labs.length} labs
+          </span>
+        </div>
+        <ChevronDown size={16} className={`text-[#86868b] transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && (
+        <div className="px-5 pb-5 space-y-3">
+          {labs.map(l => (
+            <div key={l.device} className="p-3 rounded-xl bg-white border border-[#e8e8ed]">
+              <div className="flex items-center justify-between mb-1">
+                <p className="text-sm font-semibold text-[#1d1d1f]">{l.device}</p>
+              </div>
+              <p className="text-[11px] font-medium mb-1" style={{ color: accent }}>{l.day}</p>
+              <p className="text-xs text-[#6e6e73]">{l.tasks}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── SVG hardware illustrations ──
 
 function LaptopIllustration() {
@@ -157,10 +191,10 @@ function JetsonIllustration() {
 }
 
 const devices = [
-  { name: 'Your Own Laptop / PC', subtitle: 'Any OS · Lab Day 1', desc: 'Set up llama.cpp, run your first inference, benchmark tok/s across model sizes on your own machine.', color: '#6B7280', Illustration: LaptopIllustration },
-  { name: 'Raspberry Pi 4', subtitle: 'ARM · Lab Day 2', desc: 'Quantization experiments on ARM. Compare INT4 vs INT8 latency. Power-aware inference on a 1.5GHz Quad-core Cortex-A72.', color: '#22C55E', Illustration: RaspberryPiIllustration },
-  { name: 'Android Device', subtitle: 'Mobile · Lab Day 3', desc: 'SmolChat-Android live session with Shubham Panchal. Deploy a real LLM on your phone.', color: '#3B82F6', Illustration: AndroidIllustration },
-  { name: 'Jetson Orin Nano', subtitle: 'NVIDIA CUDA · Demo (To Be Decided)', desc: 'CUDA inference on edge GPU. TensorRT-LLM on Jetson. GPU vs CPU throughput battle. Demo by Dr. Raj — not yet confirmed.', color: '#EAB308', Illustration: JetsonIllustration },
+  { name: 'Your Own Laptop / PC', subtitle: 'Any OS · Lab Day 1', desc: 'Set up llama.cpp, run your first inference, benchmark tok/s across model sizes on your own machine.', color: '#6B7280', Illustration: LaptopIllustration, phase: 'Phase 1', phaseColor: '#E91E8C' },
+  { name: 'Raspberry Pi 4', subtitle: 'ARM · Lab Day 2', desc: 'Quantization experiments on ARM. Compare INT4 vs INT8 latency. Power-aware inference on a 1.5GHz Quad-core Cortex-A72.', color: '#22C55E', Illustration: RaspberryPiIllustration, phase: 'Phase 1', phaseColor: '#E91E8C' },
+  { name: 'Android Device', subtitle: 'Mobile · Lab Day 3', desc: 'SmolChat-Android live session with Shubham Panchal. Deploy a real LLM on your phone.', color: '#3B82F6', Illustration: AndroidIllustration, phase: 'Phase 2', phaseColor: '#7C3AED' },
+  { name: 'Jetson Orin Nano', subtitle: 'NVIDIA CUDA · Demo (To Be Decided)', desc: 'CUDA inference on edge GPU. TensorRT-LLM on Jetson. GPU vs CPU throughput battle. Demo by Dr. Raj — not yet confirmed.', color: '#EAB308', Illustration: JetsonIllustration, phase: 'Phase 2', phaseColor: '#7C3AED' },
 ]
 
 const hardwareGuide = [
@@ -215,10 +249,17 @@ export default function PhasesSection() {
             {devices.map((d, i) => (
               <div
                 key={d.name}
-                className="card rounded-2xl overflow-hidden group"
+                className="card rounded-2xl overflow-hidden group relative"
                 data-reveal="scale"
                 data-delay={String(i + 1)}
               >
+                {/* Phase badge */}
+                <span
+                  className="absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full text-white z-10"
+                  style={{ background: d.phaseColor }}
+                >
+                  {d.phase}
+                </span>
                 <div
                   className="w-full h-44 rounded-xl mb-4 flex items-center justify-center overflow-hidden"
                   style={{ background: `radial-gradient(ellipse at center, ${d.color}18, #f5f5f7)` }}
@@ -236,6 +277,26 @@ export default function PhasesSection() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Phase breakdown dropdowns */}
+          <div className="mt-10 grid md:grid-cols-2 gap-5" data-reveal>
+            <PhaseLabDropdown
+              title="Phase 1 — Hardware Labs"
+              accent="#E91E8C"
+              labs={[
+                { device: 'Your Own Laptop / PC', day: 'Lab Day 1', tasks: 'llama.cpp setup, first inference, tok/s benchmarks across model sizes' },
+                { device: 'Raspberry Pi 4', day: 'Lab Day 2', tasks: 'ARM inference, INT4 vs INT8 quantization, latency comparison, power-aware inference' },
+              ]}
+            />
+            <PhaseLabDropdown
+              title="Phase 2 — Hardware Labs"
+              accent="#7C3AED"
+              labs={[
+                { device: 'Android Device (Shubham Panchal)', day: 'Lab Day 3 — CONFIRMED', tasks: '3-hour workshop, SmolChat-Android, ONNX runtime, on-device LLM deployment' },
+                { device: 'Jetson Orin Nano', day: 'Demo — To Be Decided', tasks: 'CUDA inference, TensorRT-LLM, GPU vs CPU throughput. Dr. Raj will demo live.' },
+              ]}
+            />
           </div>
 
           {/* Bottom note */}
