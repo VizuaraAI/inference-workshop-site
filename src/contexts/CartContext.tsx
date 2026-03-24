@@ -109,8 +109,8 @@ function getDiscount(items: Set<CartItemId>): number {
   // Entire bundle: original 215,000 → 172,000 (save 43,000)
   if (hasAll) return 43000
 
-  // Whenever both phases are selected: save 20,000
-  if (items.has('phase1') && items.has('phase2')) return 20000
+  // Phase 1 + Phase 2 only (exactly these two, no add-ons): save 20,000
+  if (items.has('phase1') && items.has('phase2') && items.size === 2) return 20000
 
   return 0
 }
