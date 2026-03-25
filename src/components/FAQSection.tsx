@@ -99,8 +99,8 @@ const faqGroups = [
         a: 'Guest sessions are scheduled throughout May 2026. Some speakers are confirmed; others are pending confirmation. You will be notified as soon as each date is finalized. All sessions are recorded if you cannot attend live.',
       },
       {
-        q: 'Are guest speaker sessions included in the base phase fee?',
-        a: 'No. The Guest Speaker Pass (₹30,000) is a separate add-on that gives you access to all 9 industry sessions. It is optional but highly recommended if you are targeting roles at top AI companies — the career insights and networking alone are worth it.',
+        q: 'Are guest speaker sessions included in Phase 1 or Phase 2?',
+        a: 'No — the Guest Speaker Pass is a separate add-on and is not included in Phase 1 or Phase 2. Even if you purchase both phases, guest speaker sessions are not automatically included. You need to add the Guest Speaker Pass separately when enrolling. The pass gives you access to all 9 industry sessions from speakers at Anthropic, NVIDIA, Microsoft, Apple, and more.',
       },
     ],
   },
