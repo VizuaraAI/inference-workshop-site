@@ -63,7 +63,7 @@ export default function Hero() {
           data-reveal data-delay="2"
           className="subhead max-w-2xl mx-auto mb-10 text-lg"
         >
-          A 4-week intensive taught live by Dr. Raj Dandekar (MIT PhD)
+          A 4-week intensive workshop taught live by Dr. Raj Dandekar (MIT PhD)
           with 9 industry experts from Anthropic, NVIDIA, Apple &amp; more.
           <span className="block mt-2">Can&apos;t attend live? All sessions are recorded for lifetime access.</span>
         </p>
