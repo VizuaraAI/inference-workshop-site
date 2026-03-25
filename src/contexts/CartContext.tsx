@@ -51,7 +51,7 @@ export const CART_ITEMS: Record<CartItemId, CartItem> = {
     name: '1:1 Research Mentorship — 2 Months',
     price: 70000,
     originalPrice: 84000,
-    description: 'With Yash Dixit, AI/ML Product Manager at Apple',
+    description: 'With Yash Dixit (Apple) & Dr. Raj Dandekar (MIT PhD)',
   },
 }
 
