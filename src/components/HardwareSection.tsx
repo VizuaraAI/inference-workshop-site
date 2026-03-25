@@ -138,6 +138,7 @@ const devices = [
     desc: 'Quantization experiments on ARM. Compare INT4 vs INT8 latency. Power-aware inference on a 1.5GHz Quad-core Cortex-A72.',
     color: '#22C55E',
     Illustration: RaspberryPiIllustration,
+    image: '/raspberry-pi-4.jpg',
   },
   {
     name: 'Android Device',
@@ -152,6 +153,7 @@ const devices = [
     desc: 'CUDA inference on edge GPU. TensorRT-LLM on Jetson. GPU vs CPU throughput battle. Demo by Dr. Raj — not yet confirmed.',
     color: '#EAB308',
     Illustration: JetsonIllustration,
+    image: '/jetson-orin-nano.jpg',
   },
 ]
 
@@ -183,12 +185,15 @@ export default function HardwareSection() {
               data-reveal="scale"
               data-delay={String(i + 1)}
             >
-              {/* SVG board illustration */}
               <div
                 className="w-full h-44 rounded-xl mb-4 flex items-center justify-center overflow-hidden"
                 style={{ background: `radial-gradient(ellipse at center, ${d.color}18, #f5f5f7)` }}
               >
-                <d.Illustration />
+                {d.image ? (
+                  <img src={d.image} alt={d.name} className="w-full h-full object-cover" />
+                ) : (
+                  <d.Illustration />
+                )}
               </div>
 
               <div

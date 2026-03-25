@@ -45,7 +45,10 @@ export default function Hero() {
           className="inline-flex items-center gap-2 bg-white text-[#6e6e73] px-4 py-1.5 rounded-full text-sm font-medium mb-8 border border-[#d2d2d7] shadow-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--ai-pink)' }} />
-          Starts April 27, 2026 · Mon–Fri · 9 AM IST · 2–3 hrs/day · Taught live · Recordings included
+          <span className="flex flex-col items-center leading-snug">
+            <span>Starts April 27, 2026 · Mon–Fri · 9 AM IST · 2–3 hrs/day</span>
+            <span>Taught live · Recordings included</span>
+          </span>
         </div>
 
         {/* Headline */}
