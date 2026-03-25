@@ -94,6 +94,8 @@ const ENROLL_URL_MAP: Record<string, string> = {
   'phase1,phase2,speakers':            `${BUNDLE_BASE}/bundle_10003710`,
   'phase1,phase2,research':            `${BUNDLE_BASE}/bundle_10003900`,
   'mentorship,phase1,phase2':          `${BUNDLE_BASE}/bundle_10004000`,
+  'mentorship,phase1,research':        `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-research-roadmap-starter-kit-11-mentorship-with-yash-dixit`,
+  'mentorship,phase2,research':        `${BUNDLE_BASE}/inference-engineering-workshop-phase-2-research-roadmap-startket-kit-11-mentorship-with-yash-dixit`,
 
   // 4-item bundles
   'phase1,phase2,research,speakers':   `${BUNDLE_BASE}/inference-engineering-workshop-phase-1-phase-2-guest-speaker-pass-research-roadmap-starter-kit`,
