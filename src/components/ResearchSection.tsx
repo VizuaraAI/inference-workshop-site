@@ -276,101 +276,96 @@ function MentorshipSection() {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-[340px_1fr] gap-8 items-start">
-        {/* Mentor profile cards */}
-        <div className="space-y-6" data-reveal data-delay="1">
-          {/* Yash Dixit */}
-          <div className="card text-center">
-            <img
-              src={YASH_PHOTO}
-              alt="Yash Dixit"
-              className="w-24 h-24 rounded-full mx-auto mb-3 object-cover"
-              style={{ border: '3px solid #e8e8ed' }}
-            />
-            <h3 className="text-lg font-bold text-[#1d1d1f] mb-0.5" style={{ letterSpacing: '-0.02em' }}>Yash Dixit</h3>
-            <p className="text-sm text-[#86868b] mb-2">AI/ML Product Manager · Apple</p>
-            <a
-              href="https://www.linkedin.com/in/yash-dixit/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A66C2] hover:underline mb-3"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              View LinkedIn Profile
-            </a>
-            <div className="space-y-2 text-left">
-              {[
-                { label: 'Apple', detail: 'AI/ML Product Manager — on-device intelligence, ML product strategy, CoreML' },
-                { label: 'McKinsey', detail: 'Management Consultant — data-driven strategy for Fortune 500 clients' },
-                { label: 'MIT', detail: 'Graduate research in AI/ML systems and applied machine learning' },
-                { label: 'IIT', detail: 'Undergraduate engineering — top-tier technical foundation' },
-              ].map(exp => (
-                <div key={exp.label} className="p-2.5 rounded-lg bg-[#f5f5f7]">
-                  <p className="text-xs font-bold text-[#1d1d1f]">{exp.label}</p>
-                  <p className="text-[11px] text-[#86868b]">{exp.detail}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Dr. Raj Dandekar */}
-          <div className="card text-center">
-            <img
-              src="/raj-dandekar.jpg"
-              alt="Dr. Raj Dandekar"
-              className="w-24 h-24 rounded-full mx-auto mb-3 object-cover"
-              style={{ border: '3px solid #e8e8ed' }}
-            />
-            <h3 className="text-lg font-bold text-[#1d1d1f] mb-0.5" style={{ letterSpacing: '-0.02em' }}>Dr. Raj Dandekar</h3>
-            <p className="text-sm text-[#86868b] mb-2">Founder, Vizuara AI Labs · MIT PhD</p>
-            <a
-              href="https://www.linkedin.com/in/raj-dandekar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A66C2] hover:underline mb-3"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              View LinkedIn Profile
-            </a>
-            <div className="space-y-2 text-left">
-              {[
-                { label: 'MIT', detail: 'PhD in AI/ML — scientific machine learning, neural ODEs, physics-informed models' },
-                { label: 'Vizuara AI Labs', detail: 'Founder — building AI education and inference infrastructure' },
-                { label: 'Published Researcher', detail: 'Multiple publications in top ML venues — NeurIPS, AAAI, Nature' },
-              ].map(exp => (
-                <div key={exp.label} className="p-2.5 rounded-lg bg-[#f5f5f7]">
-                  <p className="text-xs font-bold text-[#1d1d1f]">{exp.label}</p>
-                  <p className="text-[11px] text-[#86868b]">{exp.detail}</p>
-                </div>
-              ))}
-            </div>
+      {/* Mentor profile cards — side by side */}
+      <div className="grid md:grid-cols-2 gap-6 mb-10" data-reveal data-delay="1">
+        {/* Yash Dixit */}
+        <div className="card text-center">
+          <img
+            src={YASH_PHOTO}
+            alt="Yash Dixit"
+            className="w-24 h-24 rounded-full mx-auto mb-3 object-cover"
+            style={{ border: '3px solid #e8e8ed' }}
+          />
+          <h3 className="text-lg font-bold text-[#1d1d1f] mb-0.5" style={{ letterSpacing: '-0.02em' }}>Yash Dixit</h3>
+          <p className="text-sm text-[#86868b] mb-2">AI/ML Product Manager · Apple</p>
+          <a
+            href="https://www.linkedin.com/in/yash-dixit/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A66C2] hover:underline mb-3"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            View LinkedIn Profile
+          </a>
+          <div className="space-y-2 text-left">
+            {[
+              { label: 'Apple', detail: 'AI/ML Product Manager — on-device intelligence, ML product strategy, CoreML' },
+              { label: 'McKinsey', detail: 'Management Consultant — data-driven strategy for Fortune 500 clients' },
+              { label: 'MIT', detail: 'Graduate research in AI/ML systems and applied machine learning' },
+              { label: 'IIT', detail: 'Undergraduate engineering — top-tier technical foundation' },
+            ].map(exp => (
+              <div key={exp.label} className="p-2.5 rounded-lg bg-[#f5f5f7]">
+                <p className="text-xs font-bold text-[#1d1d1f]">{exp.label}</p>
+                <p className="text-[11px] text-[#86868b]">{exp.detail}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* What you get */}
-        <div data-reveal data-delay="2">
-          <div className="card mb-6">
-            <h3 className="text-lg font-bold text-[#1d1d1f] mb-5" style={{ letterSpacing: '-0.02em' }}>
-              What mentorship includes
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                { title: '1:1 Call Every Two Weeks', desc: '4 live sessions over 2 months. Yash and Dr. Raj personally review your progress, give feedback, and set the direction for your next two-week sprint.', accent: '#E91E8C' },
-                { title: 'Target: Publishable Paper', desc: 'The goal is a research paper. Your mentors guide you from topic selection through experiments to a publication-ready manuscript.', accent: '#7C3AED' },
-                { title: 'Every Step Guided', desc: 'Literature review, experiment design, ablation studies, writing — your mentors walk you through every step of the research process so you never feel stuck.', accent: '#3B82F6' },
-                { title: 'Industry + Research Exposure', desc: 'Get career strategy from Yash (Apple, McKinsey) and deep research guidance from Dr. Raj (MIT PhD, published researcher). Both perspectives in one mentorship.', accent: '#22C55E' },
-                { title: 'Paper Reading Guidance', desc: 'Curated reading lists, paper discussion, and feedback on how to extract and apply insights from the literature.', accent: '#FF6B35' },
-                { title: 'Actionable Next Steps', desc: 'Every session ends with clear deliverables and deadlines. You always know exactly what to do next.', accent: '#EAB308' },
-              ].map(item => (
-                <div key={item.title} className="p-4 rounded-xl border border-[#e8e8ed] bg-[#f9f9fb]">
-                  <div className="w-1.5 h-1.5 rounded-full mb-2" style={{ background: item.accent }} />
-                  <p className="font-semibold text-sm text-[#1d1d1f] mb-1">{item.title}</p>
-                  <p className="text-xs text-[#6e6e73] leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+        {/* Dr. Raj Dandekar */}
+        <div className="card text-center">
+          <img
+            src="/raj-dandekar.jpg"
+            alt="Dr. Raj Dandekar"
+            className="w-24 h-24 rounded-full mx-auto mb-3 object-cover"
+            style={{ border: '3px solid #e8e8ed' }}
+          />
+          <h3 className="text-lg font-bold text-[#1d1d1f] mb-0.5" style={{ letterSpacing: '-0.02em' }}>Dr. Raj Dandekar</h3>
+          <p className="text-sm text-[#86868b] mb-2">Founder, Vizuara AI Labs · MIT PhD</p>
+          <a
+            href="https://www.linkedin.com/in/raj-dandekar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A66C2] hover:underline mb-3"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            View LinkedIn Profile
+          </a>
+          <div className="space-y-2 text-left">
+            {[
+              { label: 'MIT', detail: 'PhD in AI/ML — scientific machine learning, neural ODEs, physics-informed models' },
+              { label: 'Vizuara AI Labs', detail: 'Founder — building AI education and inference infrastructure' },
+              { label: 'Published Researcher', detail: 'Multiple publications in top ML venues — NeurIPS, AAAI, Nature' },
+            ].map(exp => (
+              <div key={exp.label} className="p-2.5 rounded-lg bg-[#f5f5f7]">
+                <p className="text-xs font-bold text-[#1d1d1f]">{exp.label}</p>
+                <p className="text-[11px] text-[#86868b]">{exp.detail}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </div>
 
+      {/* What mentorship includes — full width */}
+      <div className="card" data-reveal data-delay="2">
+        <h3 className="text-lg font-bold text-[#1d1d1f] mb-5" style={{ letterSpacing: '-0.02em' }}>
+          What mentorship includes
+        </h3>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { title: '1:1 Call Every Two Weeks', desc: '4 live sessions over 2 months. Yash and Dr. Raj personally review your progress, give feedback, and set the direction for your next two-week sprint.', accent: '#E91E8C' },
+            { title: 'Target: Publishable Paper', desc: 'The goal is a research paper. Your mentors guide you from topic selection through experiments to a publication-ready manuscript.', accent: '#7C3AED' },
+            { title: 'Every Step Guided', desc: 'Literature review, experiment design, ablation studies, writing — your mentors walk you through every step of the research process so you never feel stuck.', accent: '#3B82F6' },
+            { title: 'Industry + Research Exposure', desc: 'Get career strategy from Yash (Apple, McKinsey) and deep research guidance from Dr. Raj (MIT PhD, published researcher). Both perspectives in one mentorship.', accent: '#22C55E' },
+            { title: 'Paper Reading Guidance', desc: 'Curated reading lists, paper discussion, and feedback on how to extract and apply insights from the literature.', accent: '#FF6B35' },
+            { title: 'Actionable Next Steps', desc: 'Every session ends with clear deliverables and deadlines. You always know exactly what to do next.', accent: '#EAB308' },
+          ].map(item => (
+            <div key={item.title} className="p-4 rounded-xl border border-[#e8e8ed] bg-[#f9f9fb]">
+              <div className="w-1.5 h-1.5 rounded-full mb-2" style={{ background: item.accent }} />
+              <p className="font-semibold text-sm text-[#1d1d1f] mb-1">{item.title}</p>
+              <p className="text-xs text-[#6e6e73] leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
