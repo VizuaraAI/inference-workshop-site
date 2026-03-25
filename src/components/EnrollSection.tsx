@@ -279,11 +279,7 @@ export default function EnrollSection() {
                 />
               </div>
               <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7] text-xs text-[#6e6e73] text-center">
-                {earlyBird ? (
-                  <>Take both phases at early bird rates and save {formatPrice(20000)} — pay just {formatPrice(80000)} combined.</>
-                ) : (
-                  <>Take both phases and save — pay just {formatPrice(100000)} combined.</>
-                )}
+                Take both phases for {formatPrice(100000)} combined. Want the best deal? Get the entire bundle and save 15%.
               </div>
             </div>
 
@@ -335,8 +331,8 @@ export default function EnrollSection() {
                 </p>
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-xs text-[#86868b] line-through">{formatPrice(235000)}</span>
-                  <span className="text-lg font-bold text-pink-600">{formatPrice(172000)}</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-600">SAVE 27%</span>
+                  <span className="text-lg font-bold text-pink-600">{formatPrice(199750)}</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 text-pink-600">SAVE 15%</span>
                   <span className="text-[11px] font-semibold text-pink-500 ml-auto">Click to select all →</span>
                 </div>
               </button>
