@@ -35,8 +35,8 @@ export const CART_ITEMS: Record<CartItemId, CartItem> = {
   speakers: {
     id: 'speakers',
     name: 'Guest Speaker Pass',
-    price: 30000,
-    originalPrice: 36000,
+    price: 50000,
+    originalPrice: 60000,
     description: '9 industry experts from Anthropic, NVIDIA, Microsoft & more',
   },
   research: {
@@ -118,8 +118,8 @@ function getDiscount(items: Set<CartItemId>): number {
   const all: CartItemId[] = ['phase1', 'phase2', 'speakers', 'research', 'mentorship']
   const hasAll = all.every(id => items.has(id))
 
-  // Entire bundle: raw 215,000 → 156,000 (save 59,000 = ~27% off)
-  if (hasAll) return 59000
+  // Entire bundle: raw 235,000 → 172,000 (save 63,000 = ~27% off)
+  if (hasAll) return 63000
 
   // Whenever both phases are selected: save 20,000
   if (items.has('phase1') && items.has('phase2')) return 20000
