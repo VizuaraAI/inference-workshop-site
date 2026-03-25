@@ -67,7 +67,7 @@ export default function Hero() {
           to production deployment on edge devices. Taught live by Dr. Raj Dandekar (MIT PhD)
           with 9 industry experts from the world&apos;s top AI companies.
           <br className="hidden sm:block" />
-          <span className="block mt-2 text-base">Can&apos;t attend live? Recordings are provided immediately for lifetime access.</span>
+          <span className="block mt-2">Can&apos;t attend live? Recordings are provided immediately for lifetime access.</span>
         </p>
 
         {/* Company strip — inline under subtitle */}
