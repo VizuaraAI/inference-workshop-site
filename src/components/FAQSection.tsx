@@ -13,7 +13,7 @@ const faqGroups = [
       },
       {
         q: 'Can I take just Phase 1 or just Phase 2?',
-        a: 'Yes. Each phase is designed to be self-contained. Phase 1 covers foundations and optimization (quantization, speculative decoding, FlashAttention, serving engines). Phase 2 covers production and edge deployment. Taking both gives you the full picture and saves you 20%.',
+        a: 'Yes. Each phase is designed to be self-contained. Phase 1 covers foundations and optimization (quantization, speculative decoding, FlashAttention, serving engines). Phase 2 covers production and edge deployment. Taking both gives you the full picture.',
       },
       {
         q: 'Are sessions live or recorded?',

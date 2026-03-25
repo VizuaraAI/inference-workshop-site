@@ -193,7 +193,7 @@ function EarlyBirdBanner() {
             <p className="text-sm font-bold text-[#1d1d1f]">Early Bird Pricing — Ends April 1</p>
           </div>
           <p className="text-xs text-[#6e6e73]">
-            All prices below are early bird rates. After April 1, prices increase by 20%.
+            All prices below are early bird rates. After April 1, prices will increase.
           </p>
         </div>
         <div className="flex items-center gap-4 flex-shrink-0">
