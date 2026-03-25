@@ -45,7 +45,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 bg-white text-[#6e6e73] px-4 py-1.5 rounded-full text-sm font-medium mb-8 border border-[#d2d2d7] shadow-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--ai-pink)' }} />
-          Starts April 27, 2026 · Mon–Fri · 9 AM IST · 2–3 hrs/day · All lectures recorded
+          Starts April 27, 2026 · Mon–Fri · 9 AM IST · 2–3 hrs/day · Taught live · Recordings included
         </div>
 
         {/* Headline */}
@@ -64,8 +64,8 @@ export default function Hero() {
           className="subhead max-w-2xl mx-auto mb-10 text-lg"
         >
           A 4-week intensive from transformer internals and KV cache
-          to production deployment on edge devices. Taught by Dr. Raj Dandekar (MIT PhD)
-          with 9 industry experts from the world's top AI companies. All lectures are recorded for lifetime access.
+          to production deployment on edge devices. Taught live by Dr. Raj Dandekar (MIT PhD)
+          with 9 industry experts from the world&apos;s top AI companies. Can&apos;t attend live? Recordings are provided immediately for lifetime access.
         </p>
 
         {/* Company strip — inline under subtitle */}
