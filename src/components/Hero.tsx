@@ -63,11 +63,9 @@ export default function Hero() {
           data-reveal data-delay="2"
           className="subhead max-w-2xl mx-auto mb-10 text-lg"
         >
-          A 4-week intensive from transformer internals and KV cache
-          to production deployment on edge devices. Taught live by Dr. Raj Dandekar (MIT PhD)
-          with 9 industry experts from the world&apos;s top AI companies.
-          <br className="hidden sm:block" />
-          <span className="block mt-2">Can&apos;t attend live? Recordings are provided immediately for lifetime access.</span>
+          A 4-week intensive taught live by Dr. Raj Dandekar (MIT PhD)
+          with 9 industry experts from Anthropic, NVIDIA, Apple &amp; more.
+          <span className="block mt-2">Can&apos;t attend live? All sessions are recorded for lifetime access.</span>
         </p>
 
         {/* Company strip — inline under subtitle */}
@@ -92,13 +90,15 @@ export default function Hero() {
         {/* Stats row */}
         <div
           data-reveal data-delay="4"
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-16"
+          className="grid grid-cols-3 md:grid-cols-6 gap-3 max-w-4xl mx-auto mb-16"
         >
           {[
-            { n: '200+', label: 'Engineers' },
-            { n: '14', label: 'Core Lectures' },
-            { n: '9', label: 'Guest Lecturers' },
-            { n: '3', label: 'Hardware Devices' },
+            { n: '14', label: 'Live Lectures' },
+            { n: '9', label: 'Guest Speakers' },
+            { n: '4', label: 'Hardware Labs' },
+            { n: '2', label: 'Capstone Projects' },
+            { n: '1', label: 'Research Publication Track' },
+            { n: '200+', label: 'Engineers Enrolled' },
           ].map(s => (
             <div key={s.label} className="bg-white border border-[#e8e8ed] rounded-2xl py-4 px-3 shadow-sm">
               <div className="text-3xl font-bold mb-0.5 text-gradient" style={{ letterSpacing: '-0.03em' }}>{s.n}</div>
