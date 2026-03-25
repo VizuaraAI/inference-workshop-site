@@ -93,8 +93,8 @@ export default function Hero() {
           className="grid grid-cols-3 md:grid-cols-6 gap-3 max-w-4xl mx-auto mb-16"
         >
           {[
-            { n: '14', label: 'Live Lectures' },
-            { n: '9', label: 'Guest Speakers' },
+            { n: '14', label: 'Core Lectures' },
+            { n: '9', label: 'Guest Lectures' },
             { n: '4', label: 'Hardware Labs' },
             { n: '2', label: 'Capstone Projects' },
             { n: '1', label: 'Research Publication Track' },
