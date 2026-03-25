@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, ChevronDown, ChevronRight, Star } from 'lucide-react'
+import { Check, ChevronDown, ChevronRight, Star, Clock, Flame } from 'lucide-react'
 import { useCart, CART_ITEMS, formatPrice, CartItemId } from '@/contexts/CartContext'
 import { CompanyLogo } from './CompanyLogos'
+import { useEarlyBird } from '@/hooks/useEarlyBird'
 
 // ── Expandable detail panels ──
 
@@ -73,7 +74,7 @@ function MentorDetail() {
 const phase1Lectures = ['L1: The Inference Stack','L2: Transformer Deep Dive','L3: Prefill, Decode & KV Cache','L4: GPU Architecture & Roofline','L5: Quantization','L6: Speculative Decoding','L7: FlashAttention, Kernel Fusion & Inference Engines']
 const phase2Lectures = ['L8: MoE & Model Parallelism','L9: Edge Deployment','L10: Voice Pipeline','L11: Multimodal Inference','L12: Production Systems','L13: Structured Output & Evals','L14: Fine-Tuning & Distillation for Edge']
 
-function PhaseCard({ id, title, dates, price, lectures, accent, extras }: { id: CartItemId; title: string; dates: string; price: number; lectures: string[]; accent: string; extras?: string[] }) {
+function PhaseCard({ id, title, dates, price, originalPrice, lectures, accent, extras, earlyBird }: { id: CartItemId; title: string; dates: string; price: number; originalPrice: number; lectures: string[]; accent: string; extras?: string[]; earlyBird: boolean }) {
   const { toggle, has } = useCart()
   const [exp, setExp] = useState(false)
   const sel = has(id)
@@ -84,10 +85,18 @@ function PhaseCard({ id, title, dates, price, lectures, accent, extras }: { id: 
           <Check size={11} color="white" strokeWidth={3}/>
         </div>
       )}
+      {earlyBird && (
+        <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-100 text-orange-600 mb-2">Early Bird</span>
+      )}
       <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: accent }}>{title.split('—')[0].trim()}</span>
       <h3 className="text-lg font-bold mt-1 mb-0.5" style={{ letterSpacing: '-0.02em' }}>{title.split('—')[1]?.trim() || title}</h3>
       <p className="text-xs text-[#86868b] mb-3">{dates}</p>
-      <p className="text-2xl font-bold mb-3" style={{ letterSpacing: '-0.03em' }}>{formatPrice(price)}</p>
+      <div className="mb-3">
+        {earlyBird && (
+          <span className="text-sm text-[#86868b] line-through mr-2">{formatPrice(originalPrice)}</span>
+        )}
+        <span className="text-2xl font-bold" style={{ letterSpacing: '-0.03em' }}>{formatPrice(price)}</span>
+      </div>
 
       {/* Included items */}
       {extras && (
@@ -122,10 +131,10 @@ function PhaseCard({ id, title, dates, price, lectures, accent, extras }: { id: 
 
 // ── Add-on row ──
 interface AddOnProps {
-  id: CartItemId; label: string; price: number; sub: string
-  detail?: React.ReactNode
+  id: CartItemId; label: string; price: number; originalPrice: number; sub: string
+  detail?: React.ReactNode; earlyBird: boolean
 }
-function AddOnRow({ id, label, price, sub, detail }: AddOnProps) {
+function AddOnRow({ id, label, price, originalPrice, sub, detail, earlyBird }: AddOnProps) {
   const { toggle, has } = useCart()
   const [exp, setExp] = useState(false)
   const sel = has(id)
@@ -140,10 +149,14 @@ function AddOnRow({ id, label, price, sub, detail }: AddOnProps) {
           {sel && <Check size={11} color="white" strokeWidth={3}/>}
         </div>
         <div className="flex-1 min-w-0">
-          <p className="font-semibold text-[#1d1d1f] text-sm">{label}</p>
+          <div className="flex items-center gap-2">
+            <p className="font-semibold text-[#1d1d1f] text-sm">{label}</p>
+            {earlyBird && <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-full bg-orange-100 text-orange-600">Early Bird</span>}
+          </div>
           <p className="text-xs text-[#86868b] mt-0.5">{sub}</p>
         </div>
         <div className="text-right flex-shrink-0">
+          {earlyBird && <p className="text-xs text-[#86868b] line-through">+{formatPrice(originalPrice)}</p>}
           <p className="font-bold text-[#1d1d1f]">+{formatPrice(price)}</p>
         </div>
         {detail && (
@@ -164,9 +177,63 @@ function AddOnRow({ id, label, price, sub, detail }: AddOnProps) {
   )
 }
 
+function EarlyBirdBanner() {
+  const { mounted, isActive, spotsRemaining, totalSpots, days, hours, minutes, seconds } = useEarlyBird()
+
+  if (!mounted || !isActive) return null
+
+  const pad = (n: number) => String(n).padStart(2, '0')
+
+  return (
+    <div className="mb-10 p-5 rounded-2xl border-2 border-orange-200 bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <Flame size={16} className="text-orange-500"/>
+            <p className="text-sm font-bold text-[#1d1d1f]">Early Bird Pricing — Ends April 1</p>
+          </div>
+          <p className="text-xs text-[#6e6e73]">
+            All prices below are early bird rates. After April 1, prices increase by 20%.
+          </p>
+        </div>
+        <div className="flex items-center gap-4 flex-shrink-0">
+          <div className="text-center">
+            <p className="text-lg font-bold text-orange-600">{spotsRemaining}</p>
+            <p className="text-[10px] text-[#86868b] uppercase tracking-wider">spots left</p>
+          </div>
+          <div className="w-px h-8 bg-orange-200"/>
+          <div className="flex items-center gap-1">
+            <Clock size={13} className="text-orange-500"/>
+            <div className="flex items-center gap-0.5 font-mono text-sm font-bold text-[#1d1d1f]">
+              <span className="bg-white rounded px-1.5 py-0.5 border border-orange-100">{pad(days)}d</span>
+              <span className="text-orange-300">:</span>
+              <span className="bg-white rounded px-1.5 py-0.5 border border-orange-100">{pad(hours)}h</span>
+              <span className="text-orange-300">:</span>
+              <span className="bg-white rounded px-1.5 py-0.5 border border-orange-100">{pad(minutes)}m</span>
+              <span className="text-orange-300">:</span>
+              <span className="bg-white rounded px-1.5 py-0.5 border border-orange-100">{pad(seconds)}s</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mt-3">
+        <div className="w-full bg-orange-100 rounded-full h-1.5">
+          <div
+            className="bg-gradient-to-r from-orange-400 to-orange-500 h-1.5 rounded-full transition-all duration-1000"
+            style={{ width: `${(spotsRemaining / totalSpots) * 100}%` }}
+          />
+        </div>
+        <p className="text-[10px] text-[#86868b] mt-1">{spotsRemaining} of {totalSpots} early bird spots remaining</p>
+      </div>
+    </div>
+  )
+}
+
 export default function EnrollSection() {
   const { items, total, discount, discountPct, selectAll, enrollUrl } = useCart()
   const hasBase = items.has('phase1') || items.has('phase2')
+  const { mounted, isActive } = useEarlyBird()
+  const earlyBird = mounted && isActive
 
   return (
     <section id="enroll" className="py-24 bg-white">
@@ -178,6 +245,8 @@ export default function EnrollSection() {
             Select what you need. Everything adjusts instantly.
           </p>
         </div>
+
+        <EarlyBirdBanner/>
 
         <div className="grid lg:grid-cols-[1fr_320px] gap-8 items-start">
           {/* Left — options */}
@@ -191,22 +260,30 @@ export default function EnrollSection() {
                   title="Phase 1 — Foundations & Optimization"
                   dates="Apr 27 – May 10, 2026 · 7 lectures"
                   price={45000}
+                  originalPrice={54000}
                   lectures={phase1Lectures}
                   accent="#E91E8C"
                   extras={['Hardware lab sessions included', 'Colab labs & visual guides', 'Live Zoom + recordings', 'Lifetime access']}
+                  earlyBird={earlyBird}
                 />
                 <PhaseCard
                   id="phase2"
                   title="Phase 2 — Production & Edge Deployment"
                   dates="May 11 – May 25, 2026 · 7 lectures"
                   price={55000}
+                  originalPrice={66000}
                   lectures={phase2Lectures}
                   accent="#7C3AED"
                   extras={['Hardware lab sessions included', 'Colab labs & visual guides', 'Live Zoom + recordings', 'Lifetime access']}
+                  earlyBird={earlyBird}
                 />
               </div>
               <div className="mt-3 p-3 rounded-xl bg-[#f5f5f7] text-xs text-[#6e6e73] text-center">
-                Take both phases and save {formatPrice(20000)} — pay just {formatPrice(80000)} combined (20% off).
+                {earlyBird ? (
+                  <>Take both phases at early bird rates and save {formatPrice(20000)} — pay just {formatPrice(80000)} combined.</>
+                ) : (
+                  <>Take both phases and save — pay just {formatPrice(100000)} combined.</>
+                )}
               </div>
             </div>
 
@@ -218,21 +295,27 @@ export default function EnrollSection() {
                   id="speakers"
                   label="Guest Speaker Pass"
                   price={30000}
+                  originalPrice={36000}
                   sub="All 9 sessions — Anthropic, NVIDIA, Microsoft, Apple, AnyScale, Red Hat, Amazon, Mastercard"
                   detail={<SpeakersDetail/>}
+                  earlyBird={earlyBird}
                 />
                 <AddOnRow
                   id="research"
                   label="Research Roadmap + Code Starter"
                   price={15000}
+                  originalPrice={18000}
                   sub="Personalised roadmap PDF + starter code template for your research project"
+                  earlyBird={earlyBird}
                 />
                 <AddOnRow
                   id="mentorship"
                   label="1:1 Research Mentorship — 2 Months"
                   price={70000}
+                  originalPrice={84000}
                   sub="with Yash Dixit, AI/ML Product Manager at Apple · 4 bi-weekly sessions"
                   detail={<MentorDetail/>}
+                  earlyBird={earlyBird}
                 />
               </div>
             </div>
@@ -262,7 +345,7 @@ export default function EnrollSection() {
 
           {/* Right — sticky summary */}
           <div data-reveal data-delay="2">
-            <div className="sticky-price-bar">
+            <div className="sticky-price-bar" style={earlyBird ? { top: 108 } : undefined}>
               <p className="text-xs font-bold uppercase tracking-widest text-[#86868b] mb-4">Your Workshop</p>
 
               {items.size === 0 ? (
@@ -316,6 +399,13 @@ export default function EnrollSection() {
                 </p>
               )}
 
+              {earlyBird && (
+                <div className="mt-3 p-2.5 rounded-xl bg-orange-50 border border-orange-100">
+                  <p className="text-[11px] text-orange-600 font-medium text-center">
+                    Early bird pricing — ends April 1
+                  </p>
+                </div>
+              )}
               <p className="text-center text-[11px] text-[#86868b] mt-3">
                 EMI available · No refunds
               </p>

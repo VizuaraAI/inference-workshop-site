@@ -3,12 +3,15 @@
 import Image from 'next/image'
 import { ShoppingCart, ChevronRight } from 'lucide-react'
 import { useCart, formatPrice } from '@/contexts/CartContext'
+import { useEarlyBird } from '@/hooks/useEarlyBird'
 
 export default function Navbar() {
   const { items, total, setIsOpen, isOpen } = useCart()
+  const { mounted, isActive } = useEarlyBird()
+  const hasTopBar = mounted && isActive
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[rgba(255,255,255,0.88)] backdrop-blur-xl border-b border-black/6">
+    <nav className={`fixed left-0 right-0 z-50 bg-[rgba(255,255,255,0.88)] backdrop-blur-xl border-b border-black/6 transition-all ${hasTopBar ? 'top-[36px]' : 'top-0'}`}>
       <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2">

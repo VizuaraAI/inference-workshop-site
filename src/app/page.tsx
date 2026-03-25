@@ -1,9 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
+import EarlyBirdTopBar from '@/components/EarlyBirdTopBar'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import PhasesSection from '@/components/PhasesSection'
+import FrameworksSection from '@/components/FrameworksSection'
+import CapstonesSection from '@/components/CapstonesSection'
+import HardwareSection from '@/components/HardwareSection'
 import WhoSection from '@/components/WhoSection'
 import SpeakersSection from '@/components/SpeakersSection'
 import ResearchSection from '@/components/ResearchSection'
@@ -19,9 +23,13 @@ export default function Home() {
 
   return (
     <main>
+      <EarlyBirdTopBar />
       <Navbar />
       <Hero />
       <PhasesSection />
+      <FrameworksSection />
+      <CapstonesSection />
+      <HardwareSection />
       <WhoSection />
       <SpeakersSection />
       <ResearchSection />

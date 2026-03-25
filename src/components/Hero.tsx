@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { ChevronRight } from 'lucide-react'
 import { CompanyLogo } from './CompanyLogos'
+import { useEarlyBird } from '@/hooks/useEarlyBird'
 
 function TypedWord({ word, startDelay = 600, charDelay = 90 }: { word: string; startDelay?: number; charDelay?: number }) {
   const [displayed, setDisplayed] = useState('')
@@ -30,8 +31,10 @@ function TypedWord({ word, startDelay = 600, charDelay = 90 }: { word: string; s
 const companies = ['Anthropic', 'NVIDIA', 'Microsoft', 'AWS', 'Apple', 'AnyScale', 'Red Hat', 'Mastercard']
 
 export default function Hero() {
+  const { mounted, isActive } = useEarlyBird()
+  const hasTopBar = mounted && isActive
   return (
-    <section className="relative min-h-screen bg-[#f5f5f7] flex flex-col justify-center overflow-hidden pt-16">
+    <section className={`relative min-h-screen bg-[#f5f5f7] flex flex-col justify-center overflow-hidden ${hasTopBar ? 'pt-[88px]' : 'pt-16'}`}>
       {/* Ambient gradient orb */}
       <div className="hero-orb" style={{ top: '5%', left: '50%', transform: 'translateX(-50%)' }} />
 

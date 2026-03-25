@@ -13,6 +13,7 @@ export interface CartItem {
   id: CartItemId
   name: string
   price: number
+  originalPrice: number
   description: string
 }
 
@@ -21,30 +22,35 @@ export const CART_ITEMS: Record<CartItemId, CartItem> = {
     id: 'phase1',
     name: 'Phase 1 — Foundations & Optimization',
     price: 45000,
+    originalPrice: 54000,
     description: 'Apr 27 – May 10 · 7 core lectures + hardware labs included',
   },
   phase2: {
     id: 'phase2',
     name: 'Phase 2 — Production & Edge Deployment',
     price: 55000,
+    originalPrice: 66000,
     description: 'May 11 – May 25 · 7 core lectures + hardware labs included',
   },
   speakers: {
     id: 'speakers',
     name: 'Guest Speaker Pass',
     price: 30000,
+    originalPrice: 36000,
     description: '9 industry experts from Anthropic, NVIDIA, Microsoft & more',
   },
   research: {
     id: 'research',
     name: 'Research Roadmap + Code Starter',
     price: 15000,
+    originalPrice: 18000,
     description: 'Personalised research roadmap PDF + code file template',
   },
   mentorship: {
     id: 'mentorship',
     name: '1:1 Research Mentorship — 2 Months',
     price: 70000,
+    originalPrice: 84000,
     description: 'With Yash Dixit, AI/ML Product Manager at Apple',
   },
 }
