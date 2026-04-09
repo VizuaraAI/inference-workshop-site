@@ -190,10 +190,10 @@ function EarlyBirdBanner() {
         <div>
           <div className="flex items-center gap-2 mb-1.5">
             <Flame size={16} className="text-orange-500"/>
-            <p className="text-sm font-bold text-[#1d1d1f]">Early Bird Pricing — Ends April 1</p>
+            <p className="text-sm font-bold text-[#1d1d1f]">Early Bird Pricing — Deadline Extended to April 15!</p>
           </div>
           <p className="text-xs text-[#6e6e73]">
-            All prices below are early bird rates. After April 1, prices will increase.
+            All prices below are early bird rates. After April 15, prices will increase.
           </p>
         </div>
         <div className="flex items-center gap-4 flex-shrink-0">
@@ -398,7 +398,7 @@ export default function EnrollSection() {
               {earlyBird && (
                 <div className="mt-3 p-2.5 rounded-xl bg-orange-50 border border-orange-100">
                   <p className="text-[11px] text-orange-600 font-medium text-center">
-                    Early bird pricing — ends April 1
+                    Deadline Extended! Early bird pricing ends April 15
                   </p>
                 </div>
               )}

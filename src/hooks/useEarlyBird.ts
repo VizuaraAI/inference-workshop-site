@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 
-const EARLY_BIRD_START = new Date('2026-03-25T00:00:00+05:30').getTime()
-const EARLY_BIRD_END = new Date('2026-04-01T23:59:59+05:30').getTime()
+const EARLY_BIRD_START = new Date('2026-04-01T00:00:00+05:30').getTime()
+const EARLY_BIRD_END = new Date('2026-04-15T23:59:59+05:30').getTime()
 const TOTAL_SPOTS = 52
 
 export interface EarlyBirdState {

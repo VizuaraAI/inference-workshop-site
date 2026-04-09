@@ -14,7 +14,7 @@ export default function EarlyBirdTopBar() {
     <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 text-white">
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3 text-xs sm:text-sm font-medium">
         <Flame size={14} className="flex-shrink-0" />
-        <span>Early Bird Pricing ends April 1</span>
+        <span>🔥 EXTENDED! Early Bird Pricing ends April 15</span>
         <span className="hidden sm:inline text-white/70">·</span>
         <span className="hidden sm:inline">{spotsRemaining} spots left</span>
         <span className="text-white/70">·</span>
