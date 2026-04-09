@@ -93,7 +93,7 @@ const speakers: Speaker[] = [
     description: 'An inside look at how Apple approaches LLM inference — on-device models, server-side systems, privacy-first architecture, and the engineering trade-offs that define Apple\'s ML stack. What does building AI at Apple actually look like?',
     careerInsight: 'Inside view of ML product and engineering roles at Apple — what the organisation looks like, what Apple AI PM and engineering roles entail, and how to position yourself for an Apple AI role.',
     avatarGrad: 'linear-gradient(135deg,#888,#444)',
-    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQHH3cCdo2E1iA/profile-displayphoto-crop_800_800/B4EZxtNDaDIYAI-/0/1771358665567?e=1775692800&v=beta&t=LgXWJZWfnvudWPiKJk5uuRBSRTPQRybXgN4_EqxtubE',
+    photo: '/yash-dixit.jpg',
     confirmed: true,
     date: 'TBD — CONFIRMED',
   },

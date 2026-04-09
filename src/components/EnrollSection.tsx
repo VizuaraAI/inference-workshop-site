@@ -52,7 +52,7 @@ function MentorDetail() {
     <div className="mt-4 p-4 rounded-xl bg-[#f5f5f7]">
       <div className="flex items-center gap-3 mb-3">
         <img
-          src="https://media.licdn.com/dms/image/v2/D4E03AQHH3cCdo2E1iA/profile-displayphoto-crop_800_800/B4EZxtNDaDIYAI-/0/1771358665567?e=1775692800&v=beta&t=LgXWJZWfnvudWPiKJk5uuRBSRTPQRybXgN4_EqxtubE"
+          src="/yash-dixit.jpg"
           alt="Yash Dixit"
           style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
         />

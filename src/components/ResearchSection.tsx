@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { CheckCircle2, FileText, BookOpen, GraduationCap, Star, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react'
 
-const YASH_PHOTO = 'https://media.licdn.com/dms/image/v2/D4E03AQHH3cCdo2E1iA/profile-displayphoto-crop_800_800/B4EZxtNDaDIYAI-/0/1771358665567?e=1775692800&v=beta&t=LgXWJZWfnvudWPiKJk5uuRBSRTPQRybXgN4_EqxtubE'
+const YASH_PHOTO = '/yash-dixit.jpg'
 
 const SAMPLE_ROADMAP_URL = 'https://drive.google.com/file/d/1a_BfVlH1cVZehGg3enuyMUCmhFmQdPmF/view?usp=sharing'
 const SAMPLE_PAPER_URL = 'https://drive.google.com/file/d/1koIk3TdIbRUWj6DCK915vIkORp8s0cO4/view?usp=sharing'
