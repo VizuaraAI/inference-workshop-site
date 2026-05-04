@@ -17,7 +17,7 @@ function SpeakersDetail() {
     { name: 'Seiji Eicher', co: 'AnyScale', col: '#FF6B35', topic: 'Inference at Scale: Ray Serve + vLLM', confirmed: true },
     { name: 'Aayush Saini', co: 'Red Hat AI', col: '#EE0000', topic: 'Next-Gen Multimodal with Omni-VLLM', confirmed: true },
     { name: 'Suyash Harlalka', co: 'Microsoft', col: '#00A4EF', topic: 'Efficient Inference with SLMs', career: true },
-    { name: 'Shubham Panchal', co: 'Mastercard', col: '#EB001B', topic: 'On-Device Android Deployment', confirmed: true },
+    { name: 'Shubham Panchal', co: 'Independent', col: '#EB001B', topic: 'On-Device Android Deployment', confirmed: true },
     { name: 'Yash Dixit', co: 'Apple', col: '#555555', topic: 'How Inference Is Done on LLMs at Apple', career: true, confirmed: true },
   ]
   return (
@@ -292,7 +292,7 @@ export default function EnrollSection() {
                   label="Guest Speaker Pass"
                   price={50000}
                   originalPrice={60000}
-                  sub="All 9 sessions — Anthropic, NVIDIA, Microsoft, Apple, AnyScale, Red Hat, Amazon, Mastercard"
+                  sub="All 9 sessions — Anthropic, NVIDIA, Microsoft, Apple, AnyScale, Red Hat, Amazon and more"
                   detail={<SpeakersDetail/>}
                   earlyBird={earlyBird}
                 />

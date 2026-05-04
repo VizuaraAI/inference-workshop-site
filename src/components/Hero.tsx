@@ -28,7 +28,7 @@ function TypedWord({ word, startDelay = 600, charDelay = 90 }: { word: string; s
   )
 }
 
-const companies = ['Anthropic', 'NVIDIA', 'Microsoft', 'AWS', 'Apple', 'AnyScale', 'Red Hat', 'Mastercard']
+const companies = ['Anthropic', 'NVIDIA', 'Microsoft', 'AWS', 'Apple', 'AnyScale', 'Red Hat']
 
 export default function Hero() {
   const { mounted, isActive } = useEarlyBird()

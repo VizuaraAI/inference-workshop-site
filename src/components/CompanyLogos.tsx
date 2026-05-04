@@ -81,18 +81,6 @@ export function RedHatLogo({ height = 22, dark = false }: { height?: number; dar
   )
 }
 
-export function MastercardLogo({ height = 22, dark = false }: { height?: number; dark?: boolean }) {
-  const txt = dark ? '#f5f5f7' : '#1d1d1f'
-  return (
-    <svg height={height} width={height * 4.5} viewBox="0 0 99 22" fill="none">
-      <circle cx="13" cy="11" r="10" fill="#EB001B"/>
-      <circle cx="25" cy="11" r="10" fill="#F79E1B"/>
-      <path d="M19 3.2C16 5.7 14.5 8.2 14.5 11S16 16.3 19 18.8C22 16.3 23.5 13.8 23.5 11S22 5.7 19 3.2Z" fill="#FF5F00"/>
-      <text x="40" y="15.5" fontFamily="-apple-system,BlinkMacSystemFont,sans-serif" fontWeight="600" fontSize="11" fill={txt} letterSpacing="-0.2">mastercard</text>
-    </svg>
-  )
-}
-
 // Dispatcher — pass dark={true} on dark backgrounds
 export function CompanyLogo({ company, height = 20, dark = false }: { company: string; height?: number; dark?: boolean }) {
   const name = company.toLowerCase()
@@ -103,7 +91,6 @@ export function CompanyLogo({ company, height = 20, dark = false }: { company: s
   if (name.includes('apple'))       return <AppleLogo height={height} dark={dark} />
   if (name.includes('anyscale'))    return <AnyScaleLogo height={height} dark={dark} />
   if (name.includes('red hat'))     return <RedHatLogo height={height} dark={dark} />
-  if (name.includes('mastercard'))  return <MastercardLogo height={height} dark={dark} />
   return (
     <span style={{ fontFamily: 'var(--font)', fontSize: 12, fontWeight: 700, color: dark ? '#f5f5f7' : '#1d1d1f' }}>
       {company}

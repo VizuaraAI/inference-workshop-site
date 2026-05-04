@@ -79,7 +79,7 @@ const speakers: Speaker[] = [
     date: 'Fri May 15 (target — May)',
   },
   {
-    name: 'Shubham Panchal', role: 'Android ML Engineer', company: 'Mastercard', companyColor: '#EB001B',
+    name: 'Shubham Panchal', role: 'Android ML Engineer', company: 'Independent', companyColor: '#EB001B',
     topic: 'On-Device LLM Deployment on Android',
     description: 'SmolChat-Android architecture, ONNX runtime on mobile, INT4/INT8 quantization for constrained devices, live benchmarking on real Android hardware. 3-hour hands-on session.',
     avatarGrad: 'linear-gradient(135deg,#EB001B,#B8001A)',
@@ -221,7 +221,7 @@ export default function SpeakersSection() {
             <span className="text-gradient">at the frontier.</span>
           </h2>
           <p className="subhead max-w-xl mx-auto">
-            9 industry experts from Anthropic, NVIDIA, Microsoft, Apple, AnyScale, Red Hat, Amazon and Mastercard.
+            9 industry experts from Anthropic, NVIDIA, Microsoft, Apple, AnyScale, Red Hat, Amazon and more.
             Sessions at <strong>Anthropic</strong>, <strong>NVIDIA</strong>, <strong>Microsoft</strong> and <strong>Apple</strong> include a
             dedicated career insights segment.
           </p>
