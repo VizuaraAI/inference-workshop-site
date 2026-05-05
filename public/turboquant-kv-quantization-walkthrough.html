@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TurboQuant KV Cache Quantization - Visual Walkthrough</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#182033;--muted:#647084;--soft:#f6f7fb;--line:#dfe4ee;--paper:#fff;
+  --violet:#7c5cfc;--blue:#2563eb;--cyan:#0891b2;--green:#059669;--amber:#d97706;--red:#dc2626;
+  --shadow:0 18px 55px rgba(24,32,51,.10);--radius:18px;--max:1120px;
+}
+html{scroll-behavior:smooth}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:800;color:var(--violet);letter-spacing:-.02em}
+.links{display:flex;gap:14px;flex-wrap:wrap}
+.links a{font-size:13px;text-decoration:none;color:var(--muted);font-weight:650}
+.links a:hover{color:var(--violet)}
+.hero{padding:76px 22px 56px;background:linear-gradient(180deg,#fbfbff 0%,#fff 78%)}
+.hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.04fr .96fr;gap:36px;align-items:center}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--violet);font-weight:800;margin-bottom:16px}
+.dot{width:9px;height:9px;background:var(--violet);border-radius:50%;box-shadow:0 0 0 6px rgba(124,92,252,.12)}
+h1{font-size:clamp(38px,7vw,76px);line-height:1.01;letter-spacing:-.045em;margin-bottom:20px}
+h2{font-size:clamp(30px,4vw,48px);line-height:1.08;letter-spacing:-.035em;margin-bottom:14px}
+h3{font-size:22px;line-height:1.2;margin-bottom:10px;letter-spacing:-.015em}
+h4{font-size:13px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin-bottom:8px}
+p{color:var(--muted);margin-bottom:15px}
+.lead{font-size:19px;max-width:690px}
+.gradient{background:linear-gradient(120deg,var(--violet),var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+section{padding:78px 22px}
+section.alt{background:var(--soft)}
+.wrap{max-width:var(--max);margin:0 auto}
+.grid{display:grid;gap:18px}
+.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 1px 2px rgba(24,32,51,.03)}
+.hero-card{box-shadow:var(--shadow);padding:26px;background:#fff;border:1px solid var(--line);border-radius:24px}
+.callout{border-left:5px solid var(--violet);background:#f3f0ff;border-radius:0 16px 16px 0;padding:20px 22px;margin:22px 0;color:#34266f}
+.callout.green{border-left-color:var(--green);background:#ecfdf5;color:#064e3b}
+.callout.amber{border-left-color:var(--amber);background:#fffbeb;color:#78350f}
+.callout.blue{border-left-color:var(--blue);background:#eff6ff;color:#1e3a8a}
+.callout.red{border-left-color:var(--red);background:#fef2f2;color:#7f1d1d}
+code,.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+.formula{font-family:"SFMono-Regular",Consolas,monospace;background:#0f172a;color:#e2e8f0;border-radius:14px;padding:18px 20px;overflow:auto;margin:18px 0;font-size:14px}
+.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:12px;color:var(--muted);font-weight:700;background:#fff}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.flow{display:grid;grid-template-columns:1fr 56px 1fr 56px 1fr;gap:10px;align-items:stretch;margin:24px 0}
+.flow .box{border:1.5px solid var(--line);border-radius:16px;background:#fff;padding:18px;text-align:center;min-height:132px;display:flex;flex-direction:column;justify-content:center}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--violet);font-size:30px;font-weight:900}
+.tag{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800;margin:2px}
+.tag.v{background:#f3f0ff;color:var(--violet)}.tag.b{background:#eff6ff;color:var(--blue)}.tag.g{background:#ecfdf5;color:var(--green)}.tag.a{background:#fffbeb;color:var(--amber)}.tag.r{background:#fef2f2;color:var(--red)}
+.matrix{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:280px;margin:14px auto}
+.cell{height:34px;border-radius:8px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#4338ca}
+.cell.dark{background:#7c5cfc;color:white}.cell.zero{background:#f1f5f9;color:#94a3b8}
+.kv-lane{display:grid;grid-template-columns:130px 1fr 150px;gap:12px;align-items:center;margin:14px 0}
+.lane-label{font-weight:800;color:var(--ink)}
+.memory{border:1px dashed #aab4c5;border-radius:15px;padding:14px;background:#f8fafc}
+.blocks{display:flex;gap:5px;flex-wrap:wrap}
+.block{height:26px;min-width:28px;border-radius:6px;background:var(--violet);color:white;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.block.blue{background:var(--blue)}.block.green{background:var(--green)}.block.gray{background:#94a3b8}.block.amber{background:var(--amber)}
+.chart{height:230px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#fff,#f8fafc);padding:20px;display:flex;align-items:flex-end;gap:18px;justify-content:center}
+.bar{width:70px;border-radius:12px 12px 0 0;display:flex;align-items:flex-start;justify-content:center;color:white;font-weight:900;padding-top:10px;font-size:13px;transition:height .7s ease}
+.bar-label{text-align:center;font-size:12px;font-weight:800;margin-top:8px;color:var(--muted);max-width:96px}
+.bar-col{display:flex;flex-direction:column;align-items:center}
+canvas{width:100%;display:block;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.mini-note{font-size:13px;color:var(--muted);margin-top:8px}
+.divider{height:1px;background:var(--line);margin:28px 0}
+.stage{display:grid;grid-template-columns:54px 1fr;gap:16px;align-items:start;margin:18px 0}
+.num{width:48px;height:48px;border-radius:16px;background:var(--violet);color:white;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
+.num.green{background:var(--green)}.num.amber{background:var(--amber)}
+.table{overflow:auto;border:1px solid var(--line);border-radius:16px;margin:18px 0}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}
+th,td{padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+th{text-align:left;background:#f8fafc;color:var(--ink);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+tr:last-child td{border-bottom:0}
+.fade{opacity:1;transform:none}
+.fade.on{opacity:1;transform:none}
+footer{padding:44px 22px;text-align:center;border-top:1px solid var(--line);background:#fff}
+@media(max-width:860px){
+  .hero-inner,.two,.three{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);min-height:36px}
+  .kv-lane{grid-template-columns:1fr}
+  .links{display:none}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">TurboQuant KV Cache</div>
+    <div class="links">
+      <a href="#rotation">Rotation</a>
+      <a href="#flow">KV Flow</a>
+      <a href="#kernel">Kernel</a>
+      <a href="#two-stage">Two-Stage Quantization</a>
+      <a href="#takeaways">Takeaways</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="fade">
+      <div class="eyebrow"><span class="dot"></span> Vizuara AI Labs visual walkthrough</div>
+      <h1>TurboQuant: <span class="gradient">rotation, KV cache, and residual quantization</span></h1>
+      <p class="lead">TurboQuant is a KV-cache compression method for long-context LLM inference. The core idea is to store keys and values in a low-bit form, keep the expensive full-precision reconstruction transient inside the attention computation, and use a rotation or projection trick so aggressive quantization damages the attention signal less.</p>
+      <div class="row">
+        <span class="pill">random rotation vs trained weights</span>
+        <span class="pill">quantized K/V in HBM</span>
+        <span class="pill">MSE quantizer + QJL residual</span>
+      </div>
+    </div>
+    <div class="hero-card fade">
+      <h3>The whole data path in one picture</h3>
+      <div class="flow" style="grid-template-columns:1fr;gap:12px">
+        <div class="box"><h4>During token generation</h4><p>K and V vectors are produced by the transformer layer.</p></div>
+        <div class="box"><h4>Before writing cache</h4><p>A compression transform and quantizer encode K/V into fewer bits.</p></div>
+        <div class="box"><h4>During future attention</h4><p>Compressed K/V are read, decoded transiently, used for dot products, and discarded.</p></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="rotation">
+  <div class="wrap">
+    <div class="fade">
+      <h2>Rotation: what is random, what is trained?</h2>
+      <p>There are two different objects that can be easy to mix together: the model's normal projection weights and the extra transform used for quantization. The model projection weights are learned during pre-training. The TurboQuant-style rotation used to make KV vectors more quantization-friendly is not learned in the usual sense; it is typically sampled as a random orthogonal transform, such as a randomized Hadamard or random rotation, and then kept fixed.</p>
+    </div>
+    <div class="grid two">
+      <div class="card fade">
+        <h3>Learned during pre-training</h3>
+        <p>Transformer weights like <span class="mono">Wq</span>, <span class="mono">Wk</span>, and <span class="mono">Wv</span> are optimized by gradient descent.</p>
+        <div class="formula">hidden_state x Wk = key vector k<br>hidden_state x Wv = value vector v</div>
+        <span class="tag b">trained model parameters</span>
+      </div>
+      <div class="card fade">
+        <h3>Fixed for quantization</h3>
+        <p>The rotation or JL-style projection is chosen to spread outliers across coordinates before quantization. It is a mathematical preprocessing transform, not a new trainable layer in the base model.</p>
+        <div class="formula">rotated_k = R x k<br>R is sampled once, then reused</div>
+        <span class="tag v">random orthogonal transform</span>
+      </div>
+    </div>
+    <div class="callout amber fade">
+      <strong>Reconciliation.</strong> If a lecture sentence sounded like "the rotation matrix parameters are trained during pre-training," the most likely intended meaning is that the model's K/V-producing projection weights were trained during pre-training. The paper's "random rotation matrix" refers to the extra quantization transform, which is randomly generated and fixed.
+    </div>
+    <div class="grid two" style="align-items:center">
+      <div class="card fade">
+        <h3>Why rotate at all?</h3>
+        <p>Quantization hates outliers. If one coordinate is huge and most coordinates are tiny, a low-bit grid spends too much of its range on that single coordinate and wipes out subtle structure elsewhere.</p>
+        <p>A random orthogonal rotation preserves distances and inner products in full precision, but redistributes energy across coordinates. After rotation, the same vector is less spiky and easier to quantize.</p>
+      </div>
+      <canvas id="rotationCanvas" width="900" height="440" class="fade" aria-label="Spiky vector before rotation and balanced vector after rotation"></canvas>
+    </div>
+  </div>
+</section>
+
+<section id="flow" class="alt">
+  <div class="wrap">
+    <div class="fade">
+      <h2>The KV cache stores the compressed form</h2>
+      <p>During autoregressive inference, every generated token contributes one K vector and one V vector per layer. TurboQuant's purpose is to reduce how many HBM bytes those cached vectors consume.</p>
+    </div>
+    <div class="flow fade">
+      <div class="box">
+        <h4>Layer output</h4>
+        <h3>FP16/BF16 K,V</h3>
+        <p>Fresh key and value vectors are produced for the current token.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="box">
+        <h4>Compression</h4>
+        <h3>rotate + quantize</h3>
+        <p>The cache representation is encoded into low-bit integers plus metadata.</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="box">
+        <h4>HBM KV cache</h4>
+        <h3>quantized K,V</h3>
+        <p>The long-lived cache is compressed, not full FP16.</p>
+      </div>
+    </div>
+    <div class="grid two">
+      <div class="card fade">
+        <h3>What lives in HBM?</h3>
+        <div class="kv-lane">
+          <div class="lane-label">Token 1</div>
+          <div class="memory"><div class="blocks"><span class="block">Kq</span><span class="block blue">Vq</span><span class="block gray">scale</span><span class="block gray">meta</span></div></div>
+          <div class="mini-note">compressed</div>
+        </div>
+        <div class="kv-lane">
+          <div class="lane-label">Token 2</div>
+          <div class="memory"><div class="blocks"><span class="block">Kq</span><span class="block blue">Vq</span><span class="block gray">scale</span><span class="block gray">meta</span></div></div>
+          <div class="mini-note">compressed</div>
+        </div>
+        <div class="kv-lane">
+          <div class="lane-label">Token N</div>
+          <div class="memory"><div class="blocks"><span class="block">Kq</span><span class="block blue">Vq</span><span class="block gray">scale</span><span class="block gray">meta</span></div></div>
+          <div class="mini-note">compressed</div>
+        </div>
+      </div>
+      <div class="card fade">
+        <h3>What does not live there?</h3>
+        <p>The reconstructed floating-point K/V values do not need to be written back into the cache. Reconstructing them in HBM would defeat much of the memory-saving purpose.</p>
+        <div class="callout green">
+          The cache is long-lived. The dequantized values are short-lived. They exist just long enough for attention math.
+        </div>
+        <div class="chart">
+          <div class="bar-col"><div class="bar" style="height:188px;background:var(--red)">16b</div><div class="bar-label">FP16 cache</div></div>
+          <div class="bar-col"><div class="bar" style="height:44px;background:var(--violet)">~2.5b</div><div class="bar-label">TurboQuant-style cache</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kernel">
+  <div class="wrap">
+    <div class="fade">
+      <h2>Attention reads compressed K/V and reconstructs transiently</h2>
+      <p>At a future token, the current query needs to attend over all previous keys and values. The attention kernel streams compressed K/V from HBM, decodes small tiles into registers or SRAM, performs floating-point dot products and weighted sums, then moves on.</p>
+    </div>
+    <div class="grid three">
+      <div class="card fade">
+        <h3>1. Read</h3>
+        <p>Quantized K/V blocks are loaded from HBM. This is the expensive traffic TurboQuant reduces.</p>
+        <span class="tag v">HBM bandwidth saved</span>
+      </div>
+      <div class="card fade">
+        <h3>2. Decode inside kernel</h3>
+        <p>Low-bit codes are dequantized in registers or SRAM-like on-chip storage. These FP values are working values, not a persistent cache.</p>
+        <span class="tag b">transient FP math</span>
+      </div>
+      <div class="card fade">
+        <h3>3. Compute and discard</h3>
+        <p>The kernel computes <span class="mono">q·k</span>, softmax, and the weighted sum over V. The reconstructed K/V tile is discarded after use.</p>
+        <span class="tag g">no FP writeback</span>
+      </div>
+    </div>
+    <div class="formula fade">
+for each tile of cached tokens:
+    packed_k, packed_v = read_from_HBM()
+    k_tile, v_tile = dequantize_in_registers_or_SRAM(packed_k, packed_v)
+    scores += q @ k_tile.T
+    output += softmax(scores) @ v_tile
+    discard(k_tile, v_tile)
+    </div>
+    <div class="callout blue fade">
+      This is the correct mental model: quantized K/V are stored in HBM; dequantized floating-point K/V are temporary inside the attention kernel; the temporary reconstructed values are not written back to HBM.
+    </div>
+  </div>
+</section>
+
+<section id="two-stage" class="alt">
+  <div class="wrap">
+    <div class="fade">
+      <h2>The two-stage quantization pipeline</h2>
+      <p>The useful way to understand the MSE plus QJL design is as a base approximation plus an error-correction sketch. The first stage captures the easy, high-energy part of the vector. The second stage stores a very cheap summary of what the first stage missed.</p>
+    </div>
+    <div class="stage fade">
+      <div class="num">1</div>
+      <div class="card">
+        <h3>Stage 1: MSE quantizer</h3>
+        <p>The vector is quantized with parameters chosen to minimize mean squared error between the original vector and the reconstructed vector. This gives a strong low-bit approximation.</p>
+        <div class="formula">q_base = Quantize_MSE(x)<br>x_base = Dequantize(q_base)<br>residual r = x - x_base</div>
+      </div>
+    </div>
+    <div class="stage fade">
+      <div class="num green">2</div>
+      <div class="card">
+        <h3>Stage 2: 1-bit Quantized JL transform on the residual</h3>
+        <p>The residual still contains information that can matter for attention. Instead of storing the full residual, a Johnson-Lindenstrauss-style random projection compresses it into a small sketch, then stores only the sign bits.</p>
+        <div class="formula">sketch = sign(S x r)<br>S = random projection / JL transform<br>store sketch with 1 bit per projected coordinate</div>
+      </div>
+    </div>
+    <div class="stage fade">
+      <div class="num amber">3</div>
+      <div class="card">
+        <h3>During attention: combine both estimates</h3>
+        <p>The base quantized vector gives the main approximation. The QJL residual sketch gives a cheap correction to preserve dot-product behavior, especially the angular or similarity information that attention scores care about.</p>
+        <div class="formula">attention score q·x ≈ q·x_base + correction_from_QJL_residual</div>
+      </div>
+    </div>
+    <div class="grid two" style="align-items:center;margin-top:26px">
+      <canvas id="residualCanvas" width="900" height="440" class="fade" aria-label="MSE quantizer then residual sketch"></canvas>
+      <div class="card fade">
+        <h3>Why a residual stage helps</h3>
+        <p>A tiny base quantizer might get the broad vector direction right but lose smaller components. Those smaller components can change dot products across many cached tokens.</p>
+        <p>QJL uses randomness differently from scalar quantization: it compresses geometry. The sign of random projections can preserve similarity information surprisingly well for very little storage.</p>
+        <div class="callout green">Base quantizer: stores approximate coordinates.<br>QJL residual: stores a compressed hint about the leftover geometry.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="takeaways">
+  <div class="wrap">
+    <div class="fade">
+      <h2>Precise takeaways</h2>
+    </div>
+    <div class="table fade">
+      <table>
+        <thead><tr><th>Topic</th><th>Clean mental model</th></tr></thead>
+        <tbody>
+          <tr><td>Rotation matrix</td><td>The model's projection weights are trained during pre-training. The quantization rotation/JL transform is randomly generated or structured-random and fixed; it is used to spread outliers and preserve geometry before low-bit storage.</td></tr>
+          <tr><td>KV cache contents</td><td>The persistent HBM cache stores quantized K/V codes plus any needed scales or metadata, not full dequantized FP K/V.</td></tr>
+          <tr><td>Attention-time computation</td><td>Compressed K/V are read from HBM and dequantized transiently inside the attention kernel, typically in registers or on-chip memory, then used for floating-point score and value computations.</td></tr>
+          <tr><td>No writeback</td><td>The temporary dequantized K/V tiles are discarded after the dot product or weighted-sum tile. Writing them back to HBM would largely erase the memory benefit.</td></tr>
+          <tr><td>Two-stage quantization</td><td>The MSE quantizer gives a base approximation. The 1-bit QJL residual stores a low-cost geometric correction for the quantization error.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout fade">
+      A concise one-line summary: TurboQuant compresses the KV cache by storing low-bit, geometry-aware representations of K and V; the attention kernel briefly reconstructs or estimates what it needs for dot products, but the long-lived memory footprint stays compressed.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">Vizuara AI Labs</div>
+  <p class="mini-note">TurboQuant KV cache quantization visual walkthrough</p>
+</footer>
+
+<script>
+const $ = (sel) => document.querySelector(sel);
+const observer = new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+
+function drawAxes(ctx,w,h,pad){
+  ctx.strokeStyle='#dfe4ee';ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){const y=pad+(h-2*pad)*i/4;ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(w-pad,y);ctx.stroke();}
+  ctx.strokeStyle='#182033';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pad,pad);ctx.lineTo(pad,h-pad);ctx.lineTo(w-pad,h-pad);ctx.stroke();
+}
+function drawRotation(){
+  const c=$('#rotationCanvas'); if(!c) return; const ctx=c.getContext('2d'); const w=c.width,h=c.height; ctx.clearRect(0,0,w,h);
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+  const left={x:62,y:74,w:330,h:285}, right={x:508,y:74,w:330,h:285};
+  const spiky=[7,5,6,92,4,6,5,8,4,7,5,6];
+  const rotated=[28,34,31,25,37,30,29,33,27,36,32,30];
+  function panel(p,title,vals,color,outlier){
+    ctx.fillStyle='#182033';ctx.font='700 22px Inter, sans-serif';ctx.fillText(title,p.x,p.y-28);
+    ctx.strokeStyle='#dfe4ee';ctx.strokeRect(p.x,p.y,p.w,p.h);
+    const max=100,bw=p.w/vals.length*.68;
+    vals.forEach((v,i)=>{const x=p.x+i*p.w/vals.length+p.w/vals.length*.16;const bh=v/max*(p.h-44);ctx.fillStyle=outlier===i?'#dc2626':color;ctx.fillRect(x,p.y+p.h-24-bh,bw,bh);});
+    ctx.fillStyle='#647084';ctx.font='600 13px Inter, sans-serif';ctx.fillText('coordinate values',p.x,p.y+p.h+28);
+  }
+  panel(left,'Before: spiky coordinate',spiky,'#2563eb',3);
+  panel(right,'After: energy spread out',rotated,'#7c5cfc',-1);
+  ctx.strokeStyle='#7c5cfc';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(414,215);ctx.lineTo(480,215);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(480,215);ctx.lineTo(462,203);ctx.lineTo(462,227);ctx.closePath();ctx.fillStyle='#7c5cfc';ctx.fill();
+  ctx.fillStyle='#34266f';ctx.font='800 15px Inter, sans-serif';ctx.fillText('fixed random R',414,194);
+}
+function drawResidual(){
+  const c=$('#residualCanvas'); if(!c) return; const ctx=c.getContext('2d'); const w=c.width,h=c.height; ctx.clearRect(0,0,w,h); ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+  const xs=[48,92,136,180,224,268,312,356];
+  const original=[68,142,116,238,188,112,164,214];
+  const base=[80,130,130,220,190,120,160,210];
+  ctx.fillStyle='#182033';ctx.font='800 24px Inter, sans-serif';ctx.fillText('Original vector',40,45);
+  ctx.font='800 24px Inter, sans-serif';ctx.fillText('MSE base + residual sketch',490,45);
+  original.forEach((y,i)=>{ctx.fillStyle='#2563eb';ctx.fillRect(xs[i],290-y*.72,24,y*.72);});
+  base.forEach((y,i)=>{ctx.fillStyle='#7c5cfc';ctx.fillRect(490+i*44,290-y*.72,24,y*.72);const r=original[i]-y;ctx.fillStyle=r>=0?'#059669':'#d97706';ctx.fillRect(490+i*44+28,290-(r>=0?r*1.8:0),12,Math.abs(r)*1.8);});
+  ctx.fillStyle='#647084';ctx.font='700 13px Inter, sans-serif';ctx.fillText('FP vector x',82,330);ctx.fillText('purple = MSE reconstruction, green/amber = residual signs',492,330);
+  ctx.strokeStyle='#7c5cfc';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(395,190);ctx.lineTo(455,190);ctx.stroke();ctx.beginPath();ctx.moveTo(455,190);ctx.lineTo(438,179);ctx.lineTo(438,201);ctx.closePath();ctx.fillStyle='#7c5cfc';ctx.fill();
+  ctx.fillStyle='#34266f';ctx.font='800 14px Inter, sans-serif';ctx.fillText('quantize',394,170);
+  const bits=['+','-','+','+','-','+','-','+']; bits.forEach((b,i)=>{ctx.fillStyle=b==='+'?'#059669':'#d97706';ctx.fillRect(508+i*34,370,24,24);ctx.fillStyle='white';ctx.font='900 14px Inter';ctx.fillText(b,515+i*34,387);});
+  ctx.fillStyle='#647084';ctx.font='700 12px Inter';ctx.fillText('1-bit QJL residual sketch',508,412);
+}
+window.addEventListener('load',()=>{drawRotation();drawResidual();});
+window.addEventListener('resize',()=>{drawRotation();drawResidual();});
+</script>
+</body>
+</html>
